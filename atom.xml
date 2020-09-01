@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-09-01T01:41:06.169Z</updated>
+  <updated>2020-09-01T05:22:01.341Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -18,15 +18,16 @@
   
   <entry>
     <title>Windows如何重做系统</title>
-    <link href="http://yoursite.com/2020/09/01/windows/"/>
-    <id>http://yoursite.com/2020/09/01/windows/</id>
-    <published>2020-09-01T04:45:43.190Z</published>
-    <updated>2020-09-01T01:41:06.169Z</updated>
+    <link href="http://yoursite.com/2020/09/01/window10/"/>
+    <id>http://yoursite.com/2020/09/01/window10/</id>
+    <published>2020-09-01T05:06:33.000Z</published>
+    <updated>2020-09-01T05:22:01.341Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Window10重置系统与重做系统"><a href="#Window10重置系统与重做系统" class="headerlink" title="Window10重置系统与重做系统"></a>Window10重置系统与重做系统</h1><a id="more"></a><h2 id="为什么要重做系统"><a href="#为什么要重做系统" class="headerlink" title="为什么要重做系统"></a>为什么要重做系统</h2><p>1.提高系统稳定性<br>2.清理系统垃圾<br>3.修复缺失的系统文件<br>4.杀死病毒<br>5.系统崩溃——没招</p><hr><h2 id="重置系统与重装系统的区别"><a href="#重置系统与重装系统的区别" class="headerlink" title="重置系统与重装系统的区别"></a>重置系统与重装系统的区别</h2><p>1.重置利用系统现有的资源重新组成可用的系统，重装把全新的系统写入电脑<br>2.重置可以主动保留必要的文件（电脑可以开机），重装系统则需要手动备份<br>3.重置可能不会解决系统所有的问题，重装一定会<br>4.重置不需要借助工具，重装需要借助光盘或者U盘做介质下载系统镜像<br>5.重置系统后联网自动激活重装系统后可能存在系统激活问题<br>6.若系统损坏严重则只能进行系统重装</p><hr><h2 id="重做系统的注意事项"><a href="#重做系统的注意事项" class="headerlink" title="重做系统的注意事项"></a>重做系统的注意事项</h2><p>1.重装系统和重置系统都会格式化系统盘<br>2.数字权利—包括一些激活码和正版软件的激活可能失效（注意保留激活工具）  </p><hr><h2 id="重置系统"><a href="#重置系统" class="headerlink" title="重置系统"></a>重置系统</h2><p>windows&gt;设置&gt;更新和安全&gt;恢复</p><p><img src="/public/img/1.png" alt="alt"></p><hr><h2 id="重装系统"><a href="#重装系统" class="headerlink" title="重装系统"></a>重装系统</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>工具：8G以上的U盘  </p><h4 id="下载镜像源："><a href="#下载镜像源：" class="headerlink" title="下载镜像源："></a>下载镜像源：</h4><p>旧版本的系统镜像源（非官方授权）<br>[msdn I tell you]  (<a href="https://msdn.itellyou.cn/" target="_blank" rel="noopener">https://msdn.itellyou.cn/</a>)   </p><p><img src="/public/img/2.png" alt="alt"><br>Window10<br>[微软官网]  (<a href="https://www.microsoft.com/zh-cn/software-download/windows10/" target="_blank" rel="noopener">https://www.microsoft.com/zh-cn/software-download/windows10/</a>)    </p><p><img src="/public/img/3.png" alt="alt"><br>下载安装工具后运行插入U盘选择为另一台电脑安装介质  </p><p><img src="/public/img/4.png" alt="alt">  </p><p>（注意: U盘插入后微软会自动格式化U盘）  </p><h3 id="开始重装"><a href="#开始重装" class="headerlink" title="开始重装"></a>开始重装</h3><p>1.插入U盘  </p><p>2.通过bios设置U盘为第一启动项  </p><p>3.进入系统安装界面进行逐步安装  </p><p><img src="/public/img/5.png" alt="alt">    </p><p>  (注：在安装成功后系统重新启动时要拔出U盘)</p>]]></content>
+    <content type="html"><![CDATA[<hr><h1 id="Window10重置系统与重做系统"><a href="#Window10重置系统与重做系统" class="headerlink" title="Window10重置系统与重做系统"></a>Window10重置系统与重做系统</h1><a id="more"></a><h2 id="为什么要重做系统"><a href="#为什么要重做系统" class="headerlink" title="为什么要重做系统"></a>为什么要重做系统</h2><p>1.提高系统稳定性<br>2.清理系统垃圾<br>3.修复缺失的系统文件<br>4.杀死病毒<br>5.系统崩溃——没招</p><hr><h2 id="重置系统与重装系统的区别"><a href="#重置系统与重装系统的区别" class="headerlink" title="重置系统与重装系统的区别"></a>重置系统与重装系统的区别</h2><p>1.重置利用系统现有的资源重新组成可用的系统，重装把全新的系统写入电脑<br>2.重置可以主动保留必要的文件（电脑可以开机），重装系统则需要手动备份<br>3.重置可能不会解决系统所有的问题，重装一定会<br>4.重置不需要借助工具，重装需要借助光盘或者U盘做介质下载系统镜像<br>5.重置系统后联网自动激活重装系统后可能存在系统激活问题<br>6.若系统损坏严重则只能进行系统重装</p><hr><h2 id="重做系统的注意事项"><a href="#重做系统的注意事项" class="headerlink" title="重做系统的注意事项"></a>重做系统的注意事项</h2><p>1.重装系统和重置系统都会格式化系统盘<br>2.数字权利—包括一些激活码和正版软件的激活可能失效（注意保留激活工具）  </p><hr><h2 id="重置系统"><a href="#重置系统" class="headerlink" title="重置系统"></a>重置系统</h2><p>windows&gt;设置&gt;更新和安全&gt;恢复</p><p><img src="/.com//1.png" alt="alt"></p><hr><h2 id="重装系统"><a href="#重装系统" class="headerlink" title="重装系统"></a>重装系统</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>工具：8G以上的U盘  </p><h4 id="下载镜像源："><a href="#下载镜像源：" class="headerlink" title="下载镜像源："></a>下载镜像源：</h4><p>旧版本的系统镜像源（非官方授权）<br>[msdn I tell you]  (<a href="https://msdn.itellyou.cn/" target="_blank" rel="noopener">https://msdn.itellyou.cn/</a>)   </p><p><img src="/.com//2.png" alt="alt"><br>Window10<br>[微软官网]  (<a href="https://www.microsoft.com/zh-cn/software-download/windows10/" target="_blank" rel="noopener">https://www.microsoft.com/zh-cn/software-download/windows10/</a>)    </p><p><img src="/.com//3.png" alt="alt"><br>下载安装工具后运行插入U盘选择为另一台电脑安装介质  </p><p><img src="/.com//4.png" alt="alt">  </p><p>（注意: U盘插入后微软会自动格式化U盘）  </p><h3 id="开始重装"><a href="#开始重装" class="headerlink" title="开始重装"></a>开始重装</h3><p>1.插入U盘  </p><p>2.通过bios设置U盘为第一启动项  </p><p>3.进入系统安装界面进行逐步安装  </p><p>![alt]window10/5.png)    </p><p>  (注：在安装成功后系统重新启动时要拔出U盘)</p>]]></content>
     
     
-    <summary type="html">&lt;h1 id=&quot;Window10重置系统与重做系统&quot;&gt;&lt;a href=&quot;#Window10重置系统与重做系统&quot; class=&quot;headerlink&quot; title=&quot;Window10重置系统与重做系统&quot;&gt;&lt;/a&gt;Window10重置系统与重做系统&lt;/h1&gt;</summary>
+    <summary type="html">&lt;hr&gt;
+&lt;h1 id=&quot;Window10重置系统与重做系统&quot;&gt;&lt;a href=&quot;#Window10重置系统与重做系统&quot; class=&quot;headerlink&quot; title=&quot;Window10重置系统与重做系统&quot;&gt;&lt;/a&gt;Window10重置系统与重做系统&lt;/h1&gt;</summary>
     
     
     
