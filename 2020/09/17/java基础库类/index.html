@@ -16,7 +16,7 @@
 <meta property="og:description" content="java基础库类Main类  JVM运行Java应用程序的时候，首先会调用main方法  调用时不实例化这个类的对象,而是通过类名直接调用  因此需要是限制为public static main()方法定义：“public static void main(String[]  字符串数组参数名)”  jvm有限制，不能有返回值，因此返回值类型为void">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-17T13:15:21.168Z">
-<meta property="article:modified_time" content="2020-09-18T08:06:45.114Z">
+<meta property="article:modified_time" content="2020-09-22T12:13:16.506Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -298,7 +298,7 @@
 </blockquote>
 </blockquote>
 <hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class CalendarTest &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 创建一个代表系统当前日期的Calendar对象</span><br><span class="line">        Calendar c1 &#x3D; Calendar.getInstance();</span><br><span class="line">        Date date &#x3D; c1.getTime();</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;创建一个指定时间的Calendar对象</span><br><span class="line">        Calendar c2 &#x3D;Calendar.getInstance();</span><br><span class="line">        c2.set(2008,9,3);</span><br><span class="line">        System.out.println(date);</span><br><span class="line">        System.out.println(c2.getTime());</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;取出某个时间对象的具体年份月份以及日</span><br><span class="line">        System.out.println(c2.get(Calendar.YEAR));</span><br><span class="line">        System.out.println(c2.get(Calendar.MONTH));</span><br><span class="line">        System.out.println(c2.get(Calendar.DATE));</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;更改年月日</span><br><span class="line">         c1.add(Calendar.YEAR,2);</span><br><span class="line">        &#x2F;&#x2F;添加的月份数满12个月后年份会自动增加一位</span><br><span class="line">         c1.add(Calendar.MONTH,10);</span><br><span class="line">        &#x2F;&#x2F; roll方法的月份增加只会改变月份，如果满12则会进行迭代</span><br><span class="line">         c2.roll(Calendar.MONTH,10);</span><br><span class="line">         c1.add(Calendar.DATE,10);</span><br><span class="line"></span><br><span class="line">        System.out.println(c1.get(Calendar.YEAR));</span><br><span class="line">        System.out.println(c1.get(Calendar.MONTH));</span><br><span class="line">        System.out.println(c1.get(Calendar.DATE));</span><br><span class="line">        System.out.println(c2.get(Calendar.MONTH));</span><br><span class="line">        System.out.println(c1.get(Calendar.DATE));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class CalendarTest &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 创建一个代表系统当前日期的Calendar对象</span><br><span class="line">        Calendar c1 &#x3D; Calendar.getInstance();</span><br><span class="line">        Date date &#x3D; c1.getTime();</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;创建一个指定时间的Calendar对象</span><br><span class="line">        Calendar c2 &#x3D;Calendar.getInstance();</span><br><span class="line">        c2.set(2008,9,3);</span><br><span class="line">        System.out.println(date);</span><br><span class="line">        System.out.println(c2.getTime());</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;取出某个时间对象的具体年份月份以及日</span><br><span class="line">        System.out.println(c2.get(Calendar.YEAR));</span><br><span class="line">        System.out.println(c2.get(Calendar.MONTH));</span><br><span class="line">        System.out.println(c2.get(Calendar.DATE));</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;更改年月日</span><br><span class="line">         c1.add(Calendar.YEAR,2);</span><br><span class="line">        &#x2F;&#x2F;添加的月份数满12个月后年份会自动增加一位</span><br><span class="line">         c1.add(Calendar.MONTH,10);</span><br><span class="line">        &#x2F;&#x2F; roll方法的月份增加只会改变月份，如果满12则会进行迭代</span><br><span class="line">         c2.roll(Calendar.MONTH,10);</span><br><span class="line">         c1.add(Calendar.DATE,10);</span><br><span class="line"></span><br><span class="line">        System.out.println(c1.get(Calendar.YEAR));</span><br><span class="line">        System.out.println(c1.get(Calendar.MONTH));</span><br><span class="line">        System.out.println(c1.get(Calendar.DATE));</span><br><span class="line">        System.out.println(c2.get(Calendar.MONTH));</span><br><span class="line">        System.out.println(c1.get(Calendar.DATE));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;Date类与Calendar类的相互转换 </span><br><span class="line">        &#x2F;&#x2F;Date类转Calendar类</span><br><span class="line">        Calendar cal1 &#x3D; Calendar.getInstance();</span><br><span class="line">        Date  date1 &#x3D; cal1.getTime();</span><br><span class="line">        &#x2F;&#x2F;Calendar类转Date类</span><br><span class="line">        Date date2 &#x3D; new Date();</span><br><span class="line">        Calendar cal2 &#x3D;Calendar.getInstance();</span><br><span class="line">        cal2.setTime(date2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="BigDecimal类"><a href="#BigDecimal类" class="headerlink" title="BigDecimal类"></a>BigDecimal类</h2><blockquote>
 <p>float和double类型的主要设计目标是为了科学计算和工程计算<br>因在于我们的计算机是二进制的 浮点数没有办法是用二进制进行精确表示<br>商业计算往往要求结果精确，这时候BigDecimal就派上大用场  </p>
@@ -306,21 +306,112 @@
 <h3 id="BigDecimal类的常用构造方法"><a href="#BigDecimal类的常用构造方法" class="headerlink" title="BigDecimal类的常用构造方法"></a>BigDecimal类的常用构造方法</h3><ul>
 <li>1.public BigDecimal(double val)    将double表示形式转换为BigDecimal 不建议使用  </li>
 <li>2.public BigDecimal(int val)　　将int表示形式转换成BigDecimal  </li>
-<li>3.public BigDecimal(String val)　　将String表示形式转换成BigDecimal  <blockquote>
+<li>3.public BigDecimal(String val)　　将String表示形式转换成BigDecimal  </li>
+</ul>
 <blockquote>
-<p>注意：参数类型为double的构造方法的结果有一定的不可预知性 String 构造方法是完全可预知的<br>所以BigDecimal类最好使用String类的构造器</p>
+<blockquote>
+<p>注意：参数类型为double的构造方法的结果有一定的不可预知性 String 构造方法是完全可预知的<br> 所以BigDecimal类最好使用String类的构造器  </p>
 </blockquote>
 </blockquote>
 <h3 id="BigDecimal类的常用方法"><a href="#BigDecimal类的常用方法" class="headerlink" title="BigDecimal类的常用方法"></a>BigDecimal类的常用方法</h3><ul>
 <li>public BigDecimal add(BigDecimal value);                加法  </li>
-<li>public BigDecimal subtract(BigDecimal value);           减法  </li>
+<li>public BigDecimal subtract(BigDecimal value);           减法</li>
 <li>public BigDecimal multiply(BigDecimal value);           乘法  </li>
 <li>public BigDecimal divide(BigDecimal value);             除法  </li>
 </ul>
 <hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">public class BigDecimalTest &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;BigDecimal类的基础对象的构建</span><br><span class="line">        BigDecimal doubleTest1 &#x3D; new BigDecimal(&quot;0.01&quot;);</span><br><span class="line">        BigDecimal doubleTest2 &#x3D; new BigDecimal(0.01);</span><br><span class="line">        BigDecimal intTest1 &#x3D; new BigDecimal(178);</span><br><span class="line">        &#x2F;&#x2F;string 的构造器是完全预知的所以可以精确的表示0.01</span><br><span class="line">        System.out.println(doubleTest1);</span><br><span class="line">        &#x2F;&#x2F;0.01无法精确的表示double所以系统会默认随机补位</span><br><span class="line">        System.out.println(doubleTest2);</span><br><span class="line">        System.out.println(intTest1);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;BigDecimal类的基础方法的使用</span><br><span class="line">        BigDecimal testNumber1 &#x3D; new BigDecimal(&quot;0.15&quot;);</span><br><span class="line">        BigDecimal testNumber2 &#x3D; new BigDecimal(&quot;0.03&quot;);</span><br><span class="line">        System.out.println(testNumber1.add(testNumber2));</span><br><span class="line">        System.out.println(testNumber1.subtract(testNumber2));</span><br><span class="line">        System.out.println(testNumber1.multiply(testNumber2));</span><br><span class="line">        System.out.println(testNumber1.divide(testNumber2));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
+<pre><code>
+public class BigDecimalTest {
 
+    public static void main(String[] args){
+
+        //BigDecimal类的基础对象的构建
+        BigDecimal doubleTest1 = new BigDecimal(&quot;0.01&quot;);
+        BigDecimal doubleTest2 = new BigDecimal(0.01);
+        BigDecimal intTest1 = new BigDecimal(178);
+        //string 的构造器是完全预知的所以可以精确的表示0.01
+        System.out.println(doubleTest1);
+        //0.01无法精确的表示double所以系统会默认随机补位
+        System.out.println(doubleTest2);
+        System.out.println(intTest1);
+
+
+        //BigDecimal类的基础方法的使用
+        BigDecimal testNumber1 = new BigDecimal(&quot;0.15&quot;);
+        BigDecimal testNumber2 = new BigDecimal(&quot;0.03&quot;);
+        System.out.println(testNumber1.add(testNumber2));
+        System.out.println(testNumber1.subtract(testNumber2));
+        System.out.println(testNumber1.multiply(testNumber2));
+        System.out.println(testNumber1.divide(testNumber2));
+
+    }
+
+}
+</code></pre><h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><blockquote>
+<p>正则表达式定义了字符串的模式，相当于构建了一个java字符串的自定义模板<br>java.util.regex 包主要包括以下两个类：<br>attern 类：<br>pattern 对象是一个正则表达式的编译表示<br>Pattern 类没有公共构造方法 要创建一个 Pattern 对象，你必须首先调用其公共静态编译方法<br>它返回一个 Pattern 对象。该方法接受一个正则表达式作为它的第一个参数<br>Matcher 类：<br>Matcher 对象是对输入字符串进行解释和匹配操作的引擎<br>与Pattern 类一样，Matcher 也没有公共构造方法<br>需要调用 Pattern 对象的 matcher 方法来获得一个 Matcher 对象  </p>
+</blockquote>
+<h3 id="Matcher-类的方法"><a href="#Matcher-类的方法" class="headerlink" title="Matcher 类的方法"></a>Matcher 类的方法</h3><ul>
+<li>public int start()  返回以前匹配的初始索引  </li>
+<li>public int end() 返回最后匹配字符之后的偏移量  </li>
+<li>public boolean find()  尝试查找与该模式匹配的输入序列的下一个子序列  </li>
+</ul>
+<hr>
+<pre><code>
+public class RegexTest {
+
+    public static void main(String[] args){
+
+        String str = new String(&quot;请尽快联系我17824852705,我的电话是15143385727出售二手书籍16824852705&quot;);
+        // 创建一个pattern字符串模板
+        Pattern pat = Pattern.compile(&quot;((17\\d)|(15\\d))\\d{8}&quot;);
+        //调用Pattern类的matcher方法创建一个Matcher对象
+        Matcher m =pat.matcher(str);
+        //将给定字符串与模板字符串进行比较
+        while (m.find()){
+            //输出所有与模板字符串相匹配的字符串
+            System.out.println(m.group());
+        }
+
+        //描述正则表达式的特殊字符
+        Pattern pat2 =Pattern.compile(&quot;a*b&quot;);
+        Matcher m2 = pat2.matcher(&quot;aab&quot;);
+        boolean boo = m2.matches();
+        System.out.println(boo);
+
+
+         //Matcher类end()和start()方法
+         String str2 =new String(&quot;java is very good &quot;);
+         System.out.println(&quot;目标字符串：&quot;+str2);
+         Matcher m3 = Pattern.compile(&quot;\\w+&quot;).matcher(str2);
+         while(m3.find()){
+             System.out.println(m3.group()+&quot;起始字符位置：&quot;+m3.start()+&quot;结尾字符位置：&quot;+ m3.end());
+        }
+
+
+         //通过正则表达式输出字符串数组
+         String[] mails = {&quot;kongyeeku@163.com&quot;, &quot;kongyeeku@gmail.com&quot;, &quot;ligang@crazyit.org&quot;, &quot;wawa@abc.xx&quot;};
+         String mailRegEx = &quot;\\w{3,20}@\\w+\\.(com|org|cn|net|gov)&quot;;
+
+         Pattern mailPattern =Pattern.compile(mailRegEx);
+
+         //用for循环for（：）方法对数组进行遍历输出
+         Matcher matcher =null;
+         for(String mail :mails){
+            if (matcher == null)
+                //第一次匹配时创建matcher对象
+                matcher = mailPattern.matcher(mail);
+                //先重置目标字符串-避免后面重置时第一个数组会输出两次；
+                matcher.reset(mail);
+                while (matcher.find()) {
+                    System.out.println(matcher.group());
+                }
+         }
+
+
+    }
+
+} 
+</code></pre>
       
 
       
@@ -458,7 +549,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java基础库类"><span class="toc-number">1.</span> <span class="toc-text">java基础库类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Main类"><span class="toc-number">1.1.</span> <span class="toc-text">Main类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object类"><span class="toc-number">1.2.</span> <span class="toc-text">Object类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Object类方法"><span class="toc-number">1.2.1.</span> <span class="toc-text">Object类方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String-StringBuffer-StringBuilder类"><span class="toc-number">1.3.</span> <span class="toc-text">String StringBuffer StringBuilder类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String类方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">String类方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scanner类"><span class="toc-number">1.4.</span> <span class="toc-text">Scanner类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Scanner类方法"><span class="toc-number">1.4.1.</span> <span class="toc-text">Scanner类方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System类"><span class="toc-number">1.5.</span> <span class="toc-text">System类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#System类方法"><span class="toc-number">1.5.1.</span> <span class="toc-text">System类方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Math类"><span class="toc-number">1.6.</span> <span class="toc-text">Math类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Random类"><span class="toc-number">1.7.</span> <span class="toc-text">Random类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runtime类"><span class="toc-number">1.8.</span> <span class="toc-text">Runtime类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Runtime类方法"><span class="toc-number">1.8.1.</span> <span class="toc-text">Runtime类方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Date类"><span class="toc-number">1.9.</span> <span class="toc-text">Date类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Date类方法"><span class="toc-number">1.9.1.</span> <span class="toc-text">Date类方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Calendar类"><span class="toc-number">1.10.</span> <span class="toc-text">Calendar类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BigDecimal类"><span class="toc-number">1.11.</span> <span class="toc-text">BigDecimal类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BigDecimal类的常用构造方法"><span class="toc-number">1.11.1.</span> <span class="toc-text">BigDecimal类的常用构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BigDecimal类的常用方法"><span class="toc-number">1.11.2.</span> <span class="toc-text">BigDecimal类的常用方法</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java基础库类"><span class="toc-number">1.</span> <span class="toc-text">java基础库类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Main类"><span class="toc-number">1.1.</span> <span class="toc-text">Main类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object类"><span class="toc-number">1.2.</span> <span class="toc-text">Object类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Object类方法"><span class="toc-number">1.2.1.</span> <span class="toc-text">Object类方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String-StringBuffer-StringBuilder类"><span class="toc-number">1.3.</span> <span class="toc-text">String StringBuffer StringBuilder类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String类方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">String类方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scanner类"><span class="toc-number">1.4.</span> <span class="toc-text">Scanner类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Scanner类方法"><span class="toc-number">1.4.1.</span> <span class="toc-text">Scanner类方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System类"><span class="toc-number">1.5.</span> <span class="toc-text">System类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#System类方法"><span class="toc-number">1.5.1.</span> <span class="toc-text">System类方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Math类"><span class="toc-number">1.6.</span> <span class="toc-text">Math类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Random类"><span class="toc-number">1.7.</span> <span class="toc-text">Random类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runtime类"><span class="toc-number">1.8.</span> <span class="toc-text">Runtime类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Runtime类方法"><span class="toc-number">1.8.1.</span> <span class="toc-text">Runtime类方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Date类"><span class="toc-number">1.9.</span> <span class="toc-text">Date类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Date类方法"><span class="toc-number">1.9.1.</span> <span class="toc-text">Date类方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Calendar类"><span class="toc-number">1.10.</span> <span class="toc-text">Calendar类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BigDecimal类"><span class="toc-number">1.11.</span> <span class="toc-text">BigDecimal类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BigDecimal类的常用构造方法"><span class="toc-number">1.11.1.</span> <span class="toc-text">BigDecimal类的常用构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BigDecimal类的常用方法"><span class="toc-number">1.11.2.</span> <span class="toc-text">BigDecimal类的常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式"><span class="toc-number">1.12.</span> <span class="toc-text">正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Matcher-类的方法"><span class="toc-number">1.12.1.</span> <span class="toc-text">Matcher 类的方法</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -580,11 +671,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">uni-app</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">uni-app</a>
               </li>
              
               <li class="article-tag-list-item">
