@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/09/17/java%E5%9F%BA%E7%A1%80%E5%BA%93%E7%B1%BB/</loc>
+    
+    <lastmod>2021-05-07</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2021/05/06/TCP-IP%E5%8D%8F%E8%AE%AE/</loc>
     
-    <lastmod>2021-05-06</lastmod>
+    <lastmod>2021-05-07</lastmod>
     
   </url>
   
@@ -22,17 +29,10 @@
     
   </url>
   
-  <url>
-    <loc>http://yoursite.com/2020/09/17/java%E5%9F%BA%E7%A1%80%E5%BA%93%E7%B1%BB/</loc>
-    
-    <lastmod>2021-05-06</lastmod>
-    
-  </url>
-  
 
   <url>
     <loc>http://yoursite.com/</loc>
-    <lastmod>2021-05-06</lastmod>
+    <lastmod>2021-05-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -40,35 +40,28 @@
   
   <url>
     <loc>http://yoursite.com/tags/%E8%AE%A1%E7%BD%91/</loc>
-    <lastmod>2021-05-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-05-06</lastmod>
+    <lastmod>2021-05-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/uni-app/</loc>
-    <lastmod>2021-05-06</lastmod>
+    <lastmod>2021-05-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/windows/</loc>
-    <lastmod>2021-05-06</lastmod>
+    <lastmod>2021-05-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/java/</loc>
-    <lastmod>2021-05-06</lastmod>
+    <lastmod>2021-05-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
