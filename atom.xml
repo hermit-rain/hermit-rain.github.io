@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-07T15:36:45.199Z</updated>
+  <updated>2021-05-16T09:28:59.987Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>操作系统概述</title>
+    <link href="http://yoursite.com/2021/05/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/"/>
+    <id>http://yoursite.com/2021/05/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</id>
+    <published>2021-05-16T08:44:16.000Z</published>
+    <updated>2021-05-16T09:28:59.987Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是操作系统"><a href="#什么是操作系统" class="headerlink" title="什么是操作系统"></a>什么是操作系统</h2><p><strong>维基百科的解释：</strong></p><p>操作系统（英语：<strong>O</strong>perating <strong>S</strong>ystem，缩写：<strong>OS</strong>）是一组主管并控制计算机操作、运用和运行硬件、软件资源和提供公共服务来组织用户交互的相互关联的系统软件程序，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。</p><p><strong>说人话：</strong></p><p>键盘能输入，鼠标能点，显示器能看。人们可以在其上面进行听音乐、看小电影、浏览网站等一系列<strong>人机交互</strong>动作的东西。</p><p><strong>将操作系统立起来</strong></p><p>操作系统是工作在应用程序与计算机硬件之间的一层软件。向上给应用程序提供接口，向下管理各种硬件。</p><p><img src="/2021/05/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/D:%5CHexo%5Csource_posts%5C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0%5C1.jpg" alt="alt"></p><p><strong>操作系统都管理那些硬件</strong></p><p>CPU管理    内存管理    终端管理    磁盘管理    文件管理    <em>网络管理    电源管理    多核管理</em></p><p><img src="/2021/05/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/D:%5CHexo%5Csource_posts%5C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0%5C8.jpg" alt="alt"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;什么是操作系统&quot;&gt;&lt;a href=&quot;#什么是操作系统&quot; class=&quot;headerlink&quot; title=&quot;什么是操作系统&quot;&gt;&lt;/a&gt;什么是操作系统&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;维基百科的解释：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;操作系统（英语：&lt;strong&gt;O</summary>
+      
+    
+    
+    
+    
+    <category term="操作系统" scheme="http://yoursite.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>TCP/IP协议</title>
