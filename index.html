@@ -132,6 +132,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-系统调用的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/23/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">系统调用的实现</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+        
+        <a href="/2021/05/23/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
+  	<time datetime="2021-05-23T07:09:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="操作系统的接口"><a href="#操作系统的接口" class="headerlink" title="操作系统的接口"></a>操作系统的接口</h2><p>接口即一些函数，操作系统为上层应用提供一种进入到内核中的手段</p>
+<p>接口表现为函数调用又由系统提供，所以称为<strong>系统调用</strong></p>
+<h3 id="操作系统向上连接的并不是用户而是应用程序"><a href="#操作系统向上连接的并不是用户而是应用程序" class="headerlink" title="操作系统向上连接的并不是用户而是应用程序"></a>操作系统向上连接的并不是用户而是应用程序</h3><p>接口是计算机系统中两个独立的部件进行信息交换的共享边界，应用程序与操作系统之间存在接口，操作系统和计算机硬件之间也存在接口。通过接口可以实现应用程序与操作系统之间的通信和操作系统与计算机硬件之间的通信。由此可见与操作系统相连接的并不是用户，而是应用程序。</p>
+        
+          <a class="article-more-a" href="/2021/05/23/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/23/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-操作系统的启动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -321,9 +401,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Main类"><a href="#Main类" class="headerlink" title="Main类"></a>Main类</h2><blockquote>
-<p> JVM运行Java应用程序的时候，首先会调用main方法<br>  调用时不实例化这个类的对象,而是通过类名直接调用<br>  因此需要是限制为public static<br> main()方法定义：“public static void main(String[]  字符串数组参数名)”<br>  jvm有限制，不能有返回值，因此返回值类型为void</p>
+<p> JVM运行Java应用程序的时候，首先会调用main方法<br>  调用时不实例化这个类的对象,而是通过类名直接调用<br>  因此需要是限制为public static<br> main()方法定义：“public static void main(String[]  字符串数组参数名)”  </p>
 </blockquote>
-<hr>
+<h2 id="jvm有限制，不能有返回值，因此返回值类型为void"><a href="#jvm有限制，不能有返回值，因此返回值类型为void" class="headerlink" title="jvm有限制，不能有返回值，因此返回值类型为void"></a>jvm有限制，不能有返回值，因此返回值类型为void</h2>
         
           <a class="article-more-a" href="/2020/09/17/java%E5%9F%BA%E7%A1%80%E5%BA%93%E7%B1%BB/#more">more >></a>
         
