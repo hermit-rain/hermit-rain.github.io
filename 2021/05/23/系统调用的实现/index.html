@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/05/23/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/3.png">
 <meta property="og:image" content="http://yoursite.com/2021/05/23/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/6.png">
 <meta property="article:published_time" content="2021-05-23T07:09:20.000Z">
-<meta property="article:modified_time" content="2021-05-25T13:10:07.165Z">
+<meta property="article:modified_time" content="2021-06-02T12:56:16.634Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -318,6 +318,10 @@
 <h2 id="whoami-系统调用设计"><a href="#whoami-系统调用设计" class="headerlink" title="whoami  系统调用设计"></a><strong>whoami</strong>  系统调用设计</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用户态代码</span></span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">eax = <span class="number">72</span>;</span><br><span class="line"><span class="keyword">int</span> <span class="number">0x80</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//中断处理</span></span><br><span class="line">system_call:</span><br><span class="line">_sys_call_table + eax * <span class="number">4</span>  <span class="comment">//sys_whoami() -&gt; 72</span></span><br><span class="line">call sys_whoami</span><br><span class="line"><span class="comment">//内核态代码 </span></span><br><span class="line">sys_whoami()</span><br><span class="line"> &#123;</span><br><span class="line"> printk(<span class="number">100</span>,<span class="number">8</span>);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="string">"I am cxy"</span> <span class="comment">// 100地址处</span></span><br></pre></td></tr></table></figure>
 
 <p>前面我们了解到，想要设计一个whoami() 系统调用，因为很不安全所以不允许jmp，此时用户态的CPL = 3，内核态代码DPL = 0,也根本跳不进来。我们要想设计一个系统调用就要必须通过操作系统硬件设计好的 int 0x80中断指令进入内核，所以我们自己设置系统调用号eax = 72 再通过int 0x80 进入到操作系统内部。那么此时我们用户态CPL = 3,  int 0x80 的DPL 也做成 3 ，就可以穿过接口了，一旦穿过去之后，CPL就会被置为0，然后就开始执行 system_call, 在 _sys_call_table中查表就调用了 sys_whoami(); 最终就真的进入到内核去执行sys_whoami()，这时候再用printk()将内存地址100 处的字符串 “I am cxy” 打印出来，故事就到这里结束了。</p>
+<p><strong>参考资料</strong></p>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1d4411v7u7" target="_blank" rel="noopener">哈工大李治军操作系统</a></li>
+</ul>
 
       
 
