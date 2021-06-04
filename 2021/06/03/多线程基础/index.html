@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>java多线程基础 | 鑫宇的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、进程与线程1、程序、进程、线程程序：通过某种语言编写的一组指令 ，即一段静态的代码。 进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了动态性。系统运行一个程序即是一个进程从创建，运行到消亡的过程。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到 当前运行的进程。   线程概念的出现 进程的出现使操作系统的并发成为了可能，但是随着计算机">
+  <meta name="description" content="一、进程与线程1、程序、进程、线程程序：通过某种语言编写的一组指令 ，即一段静态的代码。 进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了动态性。系统运行一个程序即是一个进程从创建，运行到消亡的过程。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到 当前运行的进程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java多线程基础">
 <meta property="og:url" content="http://yoursite.com/2021/06/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="鑫宇的个人博客">
-<meta property="og:description" content="一、进程与线程1、程序、进程、线程程序：通过某种语言编写的一组指令 ，即一段静态的代码。 进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了动态性。系统运行一个程序即是一个进程从创建，运行到消亡的过程。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到 当前运行的进程。   线程概念的出现 进程的出现使操作系统的并发成为了可能，但是随着计算机">
+<meta property="og:description" content="一、进程与线程1、程序、进程、线程程序：通过某种语言编写的一组指令 ，即一段静态的代码。 进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了动态性。系统运行一个程序即是一个进程从创建，运行到消亡的过程。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到 当前运行的进程。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2021/06/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/1.png">
 <meta property="og:image" content="http://yoursite.com/2021/06/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/5.png">
@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/06/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/7.png">
 <meta property="og:image" content="http://yoursite.com/2021/06/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/8.png">
 <meta property="article:published_time" content="2021-06-03T06:38:51.000Z">
-<meta property="article:modified_time" content="2021-06-04T09:41:27.747Z">
+<meta property="article:modified_time" content="2021-06-04T10:02:11.752Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -174,6 +174,8 @@
       
         <h1 id="一、进程与线程"><a href="#一、进程与线程" class="headerlink" title="一、进程与线程"></a>一、进程与线程</h1><h2 id="1、程序、进程、线程"><a href="#1、程序、进程、线程" class="headerlink" title="1、程序、进程、线程"></a>1、程序、进程、线程</h2><p>程序：通过某种语言编写的一组指令 ，即一段<strong>静态的代码</strong>。</p>
 <p>进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了<strong>动态性</strong>。<strong>系统运行一个程序即是一个进程从创建，运行到消亡的过程</strong>。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到 当前运行的进程。</p>
+<a id="more"></a>  
+
 <img src="/2021/06/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/1.png" alt="1" style="zoom:80%;">
 
 <p><strong>线程概念的出现</strong></p>
@@ -284,11 +286,11 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NumThread</span> <span class="keyword">implements</span> <span class="title">Callable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                System.out.println(i);</span><br><span class="line">                sum += i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum; <span class="comment">//如果不需要返回值可以返回null      </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallableTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        NumThread numThread = <span class="keyword">new</span> NumThread();</span><br><span class="line">        FutureTask futureTask = <span class="keyword">new</span> FutureTask(numThread);</span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(futureTask);</span><br><span class="line">        t1.start(); <span class="comment">//new Thread(futureTask).start();</span></span><br><span class="line">        <span class="keyword">try</span> &#123; <span class="comment">//get()的返回值即为 FutureTask 构造器参数Callable实现类重写的call()的返回值</span></span><br><span class="line">            Object sum = futureTask.get();</span><br><span class="line">            System.out.println(sum);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-1-如何实现处理线程的返回值"><a href="#3-1-如何实现处理线程的返回值" class="headerlink" title="3.1 如何实现处理线程的返回值"></a>3.1 如何实现处理线程的返回值</h3><ul>
+<h3 id="3-1-如何实现处理线程的返回值"><a href="#3-1-如何实现处理线程的返回值" class="headerlink" title="3.1 如何实现处理线程的返回值"></a>3.1 如何实现处理线程的返回值</h3><ol>
 <li>主线程等待法：当我们在<code>run()</code>方法中写返回值的时候，由于主线程往往比子线程先执行完毕所以根本无法接受子线程的返回值，所以我们可以在主线程中写循环等待算法，当子线程执行完毕后再执行主线程。缺点：当需要等待的变量很多则不合适，并且需要等待多久也不确定。</li>
 <li>使用<code>Thread</code>类的<code>join()</code>方法阻塞当前线程等待子线程处理完毕后获取返回值。优点：是无需处理主线程循环等待算法，更精确；缺点：粒度不够细。</li>
 <li>通过<code>Callable</code>接口实现：1. 通过<code>Future Task</code>  2. 线程池获取</li>
-</ul>
+</ol>
 <h3 id="3-2如何理解实现Callable接口的方式要比实现Runnable接口创建多线程的方式更好"><a href="#3-2如何理解实现Callable接口的方式要比实现Runnable接口创建多线程的方式更好" class="headerlink" title="3.2如何理解实现Callable接口的方式要比实现Runnable接口创建多线程的方式更好"></a>3.2如何理解实现<code>Callable</code>接口的方式要比实现<code>Runnable</code>接口创建多线程的方式更好</h3><ul>
 <li><code>call()</code> 可以有返回值</li>
 <li><code>call()</code> 可以抛出异常，被外面的异常捕获，获取异常的信息</li>
@@ -354,7 +356,7 @@
 <li>共享数据==&gt;多个线程共同操作的数据</li>
 <li>同步监视器 俗称==&gt; 锁 任何一个对象都可以充当锁  </li>
 <li>多个线程必须共用同一把锁 (同步监视器声明的位置不可以在<code>run()</code>中)</li>
-<li>在实现Runnable接口创建的多线程中可以考虑使用 this做同步监视器</li>
+<li>在实现<code>Runnable</code>接口创建的多线程中可以考虑使用 <code>this</code>做同步监视器</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Window2</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> ticket = <span class="number">100</span>;</span><br><span class="line">    Object obj = <span class="keyword">new</span> Object();</span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (obj) &#123; <span class="comment">//此处的同步监视器可以是 this</span></span><br><span class="line">                <span class="keyword">if</span> (ticket &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">"卖票，票号为"</span> + ticket);</span><br><span class="line">                    ticket--;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -395,9 +397,7 @@
 <li><code>notifyAll()</code>：会让所有处于等待池的线程全部进入锁池去竞争获取锁的机会</li>
 </ul>
 <p><strong>注意</strong></p>
-<p>三个方法执行线程通信时必须使用在同步代码块或同步方法中</p>
-<p>三个方法的调用者必须是 同步代码块或者同步方法的 同步监视器</p>
-<p>三个方法都定义在 <code>java.lang.Object</code>中</p>
+<p>三个方法执行线程通信时必须使用在同步代码块或同步方法中; 三个方法的调用者必须是 同步代码块或者同步方法的 同步监视器;三个方法都定义在 <code>java.lang.Object</code>中</p>
 <h2 id="3-sleep-方法和wait-方法的区别"><a href="#3-sleep-方法和wait-方法的区别" class="headerlink" title="3. sleep()方法和wait() 方法的区别"></a>3. <code>sleep()</code>方法和<code>wait()</code> 方法的区别</h2><ul>
 <li><code>sleep()</code> 是 <code>Thread</code> 类的方法；<code>wait()</code> 是 <code>Object</code> 类中定义的方法</li>
 <li><code>sleep()</code> 方法可以在任何地方使用；<code>wait()</code> 只能在 <code>synchronized</code> 方法或者 <code>synchronized</code> 块中使用</li>
