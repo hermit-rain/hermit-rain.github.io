@@ -132,101 +132,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-TCP概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/11/TCP%E6%A6%82%E8%BF%B0/">TCP概述</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/06/11/TCP%E6%A6%82%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2021-06-11T03:31:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="TCP报文头"><a href="#TCP报文头" class="headerlink" title="TCP报文头"></a>TCP报文头</h2><img src="/2021/06/11/TCP%E6%A6%82%E8%BF%B0/2.png" alt="2" style="zoom: 80%;">
-
-<p>1、<strong>Source Port/Destination Port：</strong> TCP与UDP的数据包都是不包含IP地址信息的，那是IP层面上的事情，但是TCP与UDP都会有源端口和目的端口。两个进程在计算机内部通信可以有<strong>管道、内存共享、信号量、消息队列</strong>等方法，而两个进程如果需要通信最基本的前提是能够唯一的标识一个进程，通过这个唯一的标识来找到对应的进程。在本地的进程通信的过程中我们可以使用PID(进程号)来唯一的标识一个进程，但是PID只在本地唯一，如果把两个进程放到不同的计算机中，它们如果想要进行通信，此时PID就不够用了，解决这个问题的方法就是在传输层中引入<strong>协议端口号（端口）</strong>。<strong>IP层的IP地址可以唯一的标识一个主机</strong>，而TCP协议和端口可以唯一标识主机中的一个进程，所以我们利用<strong>IP地址 + 协议端口号</strong>这样的组合方式来唯一标识网络中的一个进程。有时也把这种唯一标识的模式称为套接字(socket)。虽然通信的重点是应用进程，但是我们只需要<strong>将传送的报文交到目的主机的某一个合适的端口</strong>，剩下的工作就交给TCP来完成就好。</p>
-<p><strong>2、Sequence Number：</strong>序号是建立在字节流之上的，<strong>每一个报文段的序号即是该报文段个首字节的字节流编码</strong>。假设主机A中的一个进程想通过一条TCP连接向主机B上的一个进程发送数据流，主机A中的TCP将隐式地对数据流中的每一个字节编号，假设数据流由一个包含50000字节的文件组成，其MSS为1000字节，数据流的首字节编号为0，则TCP将为该数据流构建50个报文段，即第一个报文段的序号为0；第二个报文段的序号为100，第三个报文段的序号为200，以此类推，每个序号被填入到相应TCP报文段首部的序号字段中去。</p>
-<p><strong>3、Acknowledgment Number：</strong> ack确认号是<strong>期望收到对方下一个报文段中首个字节的序号即下一个报文的序列号</strong>。假如B收到了A发送过来的报文段，其序列号是501，并且数据的长度是100字节，这表明B正确收到了来自A的<strong>序号从501-600的数据</strong>，因此B期望接着收到A的序列号为601的报文段，所以B在发送给A的确认报文段中会把ack置为601。</p>
-<p><strong>4、Offset：</strong>即数据偏移，由于头部有可选字段长度不固定，因此它指出TCP报文的数据距离TCP报文的起始处有多远。</p>
-<p><strong>5、Reservd：</strong>保留区域，保留给将来使用，目前必须置为 0</p>
-<p><strong>6、TCP Flags:</strong> 控制位，由八个标志位组成，每个标志位代表一个控制功能 ；常见的标志位如下：</p>
-<ul>
-<li><strong>URG:</strong> 紧急指针标志，用于保证TCP连接不被中断，并且督促中间层设备尽快处理。URG=1-&gt;紧急指针有效；URG=0-&gt;忽略紧急指针</li>
-<li><strong>ACK:</strong> 确认序号标志，ACK=1-&gt; 确认号有效；ACK=0 -&gt; 报文不含确认信息，忽略确认号字段 </li>
-<li><strong>PSH:</strong> push标志 ，push=1-&gt;表示是带有push标志的数据，指示接收方在接收该报文段以后应该尽可能的将该报文段交给应用程序，而不是放到缓冲区排队。</li>
-<li><strong>RST:</strong> 重置连接标志，用于重置由于主机崩溃或者其他原因而出现的错误连接，或者用于拒绝非法的报文段和拒绝连接请求</li>
-<li><strong>SYN:</strong> 同步序号，用于建立连接过程，在连接请求中 SYN=1和ACK=0 表示该数据段没有使用捎带的确认域，而连接应答捎带一个确认域即SYN=1和ACK=1</li>
-<li><strong>FIN:</strong> finish标志，用于释放连接，finish=1表示发送方已经没有数据发送了即关闭本方的数据流。</li>
-</ul>
-<p><strong>7、Window:</strong> 用来告知发送段接收端的缓存大小，以此控制发送端发送数据的速率，因而达到流量控制。</p>
-<p><strong>8、Checksum:</strong> 检验和指的是奇偶校验，此校验和是对整个的TCP报文段包括TCP头 部和TCP数据以16位进行计算所得，由发送端计算和存储，并由接收端进行验证。</p>
-<p><strong>9、Urgent Pointer:</strong> 只有当TCP Flags 中的URG=1时才有效，指出本报文段中的紧急数据的字节数。</p>
-<p><strong>10、TCP Options:</strong> 可选项，其长度可变，定义一些其他的可选参数。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">计网</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/11/TCP%E6%A6%82%E8%BF%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-TCP三次握手与四次挥手" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -948,10 +853,86 @@
 
 
   
+    <article id="post-uni-app开发-前端地图的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/24/uni-app%E5%BC%80%E5%8F%91-%E5%89%8D%E7%AB%AF%E5%9C%B0%E5%9B%BE%E7%9A%84%E5%AE%9E%E7%8E%B0/">uni--app 接入高德地图</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+        
+        <a href="/2020/08/24/uni-app%E5%BC%80%E5%8F%91-%E5%89%8D%E7%AB%AF%E5%9C%B0%E5%9B%BE%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
+  	<time datetime="2020-08-24T05:06:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、搭建Android开发环境"><a href="#一、搭建Android开发环境" class="headerlink" title="一、搭建Android开发环境"></a>一、搭建Android开发环境</h1><p>[开发工具：HBuilder X ]  (<a href="https://www.cnblogs.com/qisi007/p/10489176.html" target="_blank" rel="noopener">https://www.cnblogs.com/qisi007/p/10489176.html</a>)  </p>
+<p>[ Android SDK 安装及配置]  ( <a href="https://www.cnblogs.com/nebie/p/9145627.html" target="_blank" rel="noopener">https://www.cnblogs.com/nebie/p/9145627.html</a>) </p>
+<p>[JDK的安装及配置]  (<a href="https://zhuanlan.zhihu.com/p/105478993" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/105478993</a>)  </p>
+        
+          <a class="article-more-a" href="/2020/08/24/uni-app%E5%BC%80%E5%8F%91-%E5%89%8D%E7%AB%AF%E5%9C%B0%E5%9B%BE%E7%9A%84%E5%AE%9E%E7%8E%B0/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">uni-app</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/24/uni-app%E5%BC%80%E5%8F%91-%E5%89%8D%E7%AB%AF%E5%9C%B0%E5%9B%BE%E7%9A%84%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
 
 
