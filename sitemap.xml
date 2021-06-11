@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2021/06/11/TCP%E6%A6%82%E8%BF%B0/</loc>
-    
-    <lastmod>2021-06-11</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2021/06/10/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/</loc>
     
     <lastmod>2021-06-11</lastmod>
@@ -17,6 +10,13 @@
   
   <url>
     <loc>http://yoursite.com/2021/06/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/</loc>
+    
+    <lastmod>2021-06-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2021/06/11/TCP%E6%A6%82%E8%BF%B0/</loc>
     
     <lastmod>2021-06-11</lastmod>
     
