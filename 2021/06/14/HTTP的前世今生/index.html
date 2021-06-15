@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>HTTP的前世今生 | 鑫宇的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="HTTP的主要特点 支持客服&#x2F;服务器模式  简单快速  灵活  无连接  无状态">
+  <meta name="description" content="HTTP的主要特点支持客服&#x2F;服务器模式：HTTP协议工作于客户端&#x2F;服务器的架构之上，浏览器作为HTTP客户端通过URL向HTTP服务端发送请求，web服务器根据接受到的请求向客户端发送响应信息； 简单快速：客户端向服务器请求服务的时候，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST，每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP的前世今生">
 <meta property="og:url" content="http://yoursite.com/2021/06/14/HTTP%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/index.html">
 <meta property="og:site_name" content="鑫宇的个人博客">
-<meta property="og:description" content="HTTP的主要特点 支持客服&#x2F;服务器模式  简单快速  灵活  无连接  无状态">
+<meta property="og:description" content="HTTP的主要特点支持客服&#x2F;服务器模式：HTTP协议工作于客户端&#x2F;服务器的架构之上，浏览器作为HTTP客户端通过URL向HTTP服务端发送请求，web服务器根据接受到的请求向客户端发送响应信息； 简单快速：客户端向服务器请求服务的时候，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST，每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2021/06/14/HTTP%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/1.png">
 <meta property="og:image" content="http://yoursite.com/2021/06/14/HTTP%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/2.png">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/06/14/HTTP%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/4.png">
 <meta property="og:image" content="http://yoursite.com/2021/06/14/HTTP%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/5.png">
 <meta property="article:published_time" content="2021-06-14T06:38:56.000Z">
-<meta property="article:modified_time" content="2021-06-15T09:16:09.495Z">
+<meta property="article:modified_time" content="2021-06-15T09:23:41.059Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="计网">
 <meta name="twitter:card" content="summary">
@@ -171,26 +171,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="HTTP的主要特点"><a href="#HTTP的主要特点" class="headerlink" title="HTTP的主要特点"></a>HTTP的主要特点</h1><ul>
-<li><p>支持客服/服务器模式</p>
-</li>
-<li><p>简单快速</p>
-</li>
-<li><p>灵活</p>
-</li>
-<li><p>无连接</p>
-</li>
-<li><p>无状态</p>
+        <h1 id="HTTP的主要特点"><a href="#HTTP的主要特点" class="headerlink" title="HTTP的主要特点"></a>HTTP的主要特点</h1><p><strong>支持客服/服务器模式</strong>：HTTP协议工作于客户端/服务器的架构之上，浏览器作为HTTP客户端通过URL向HTTP服务端发送请求，web服务器根据接受到的请求向客户端发送响应信息；</p>
+<p><strong>简单快速：</strong>客户端向服务器请求服务的时候，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST，每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。</p>
+<p><strong>灵活</strong>：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记;</p>
 <a id="more"></a>  
 
-</li>
-</ul>
-<p><strong>注解</strong></p>
-<p><strong>HTTP协议工作于客户端/服务器的架构之上</strong>，浏览器作为HTTP客户端通过URL向HTTP服务端发送请求，web服务器根据接受到的请求向客户端发送响应信息；</p>
-<p>客户端向服务器请求服务的时候，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST，每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。</p>
-<p>HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记;</p>
-<p>无连接即<strong>限制每次连接只处理一次请求</strong>，服务器处理完客户的请求并收到客户的应答之后便断开连接，采用这种方式可以节省传输时间。从HTTP 1.1 默认使用了<strong>长连接</strong>，即服务器需要等待一定的时间后才断开连接，以保证连接特性。虽然目前的技术如 Keep-Alive使用长连接优化效率，但这些都处于HTTP请求之外的，也就是说在每一个独立的HTTP请求中是无法得知当前请求的HTTP是否处于长连接的状态。我们始终认为HTTP请求在结束后连接就会关闭，这是HTTP的特性，至于下层实现是否在结束请求之后关闭连接都不会关闭这个特性。Keep-Alive可以理解为下层实现对上层是透明。</p>
-<p>HTTP协议是无状态协议，<strong>无状态是指协议对于事物处理没有记忆能力</strong>，缺少状态意味着如果后续处理需要前面的信息则必须被重传。这样可能导致每次传输的数据量增大，另一方面，在服务器不需要先前的信息时它的应答会变快。</p>
+<p><strong>无连接：</strong>无连接即<strong>限制每次连接只处理一次请求</strong>，服务器处理完客户的请求并收到客户的应答之后便断开连接，采用这种方式可以节省传输时间。从HTTP 1.1 默认使用了<strong>长连接</strong>，即服务器需要等待一定的时间后才断开连接，以保证连接特性。虽然目前的技术如 Keep-Alive使用长连接优化效率，但这些都处于HTTP请求之外的，也就是说在每一个独立的HTTP请求中是无法得知当前请求的HTTP是否处于长连接的状态。我们始终认为HTTP请求在结束后连接就会关闭，这是HTTP的特性，至于下层实现是否在结束请求之后关闭连接都不会关闭这个特性。Keep-Alive可以理解为下层实现对上层是透明。</p>
+<p><strong>无状态：</strong>HTTP协议是无状态协议，<strong>无状态是指协议对于事物处理没有记忆能力</strong>，缺少状态意味着如果后续处理需要前面的信息则必须被重传。这样可能导致每次传输的数据量增大，另一方面，在服务器不需要先前的信息时它的应答会变快。</p>
 <h1 id="HTTP请求头部"><a href="#HTTP请求头部" class="headerlink" title="HTTP请求头部"></a>HTTP请求头部</h1><p>客户端发送一个HTTP请求到服务器的请求消息结构如下，主要由<strong>请求行、请求头部、空行、和请求正文</strong>这四个部分组成。</p>
 <img src="/2021/06/14/HTTP%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/1.png" alt="1" style="zoom:80%;">
 
@@ -414,7 +401,7 @@
 <li>非对称加密：加密使用的密钥和解密使用的密钥是不同的即公钥与私钥</li>
 <li>数字签名：证明某个消息或者文件是某人发出/认同的</li>
 </ul>
-<h2 id="单向加密"><a href="#单向加密" class="headerlink" title="单向加密"></a><strong>单向加密</strong></h2><p>单向加密又称不可逆加密，通常采用了哈希算法，即明文被加密成密文后，无法再解密回明文。特点如下：</p>
+<h2 id="单向加密"><a href="#单向加密" class="headerlink" title="单向加密"></a><strong>单向加密</strong></h2><p>单向加密又称不可逆加密，通常采用了哈希算法，即明文被加密成密文后，无法再解密回明文。</p>
 <ul>
 <li>同一明文对应同一密文</li>
 <li>对明文进行微小修改，密文即会发生极大变化</li>
@@ -426,7 +413,7 @@
 <li>加密解密的速度快，因此适合数据量大的时候使用</li>
 <li>同一明文不一定都应同一密文，由加密算法决定</li>
 </ul>
-<p>常用对称加密的场景有</p>
+<p><strong>常用对称加密的场景有</strong></p>
 <ul>
 <li>服务端用于保存涉及用户隐私的数据，服务端自动进行数据加密</li>
 <li>进行网络传输时，依赖其他方式进行密钥交换后，使用密钥进行对称加密解密(如SSL/TLS传输机制)</li>
@@ -437,14 +424,14 @@
 <li>非对称加密算法的性能大大弱于对称加密，不建议采用非对称加密算法加密大量的用户数据</li>
 <li>由于其加密特性，非对称加密算法加密的数据长度有限</li>
 </ul>
-<p>使用场景：</p>
+<p><strong>使用场景：</strong></p>
 <ul>
 <li>客户端利用公钥给数据加密，传输给拥有私钥的服务端进行解密。由于只是私钥可以解密该数据，该密文即使在传输过程中被截获也不会有泄露的风险。</li>
 <li>服务端对于一段明文传输的数据，先用哈希算法产生摘要信息，之后用私钥对于摘要信息进行加密产生一个数字签名。客户端收到这段明文数据和对应数字签名后，可以利用公钥来验证这段明文数据的完整性。</li>
 </ul>
 <p>常用的非对称加密的算法有：RSA、ECC、SM2</p>
 <h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a><strong>数字签名</strong></h2><p>签名就是在信息的后面加一段内容，这些内容是经过哈希后的值，可以证明信息没有被修改。哈希值一般都会加密后再和信息一起发送，以保证这个哈希值不被修改。</p>
-<p>数字签名的流程</p>
+<p><strong>数字签名的流程</strong></p>
 <ul>
 <li>创建数据密钥对</li>
 <li>一段数据利用哈希算法获得数据摘要，再用明文私钥获得哈希值的签名</li>
@@ -485,8 +472,12 @@
 <p>客户端连接成功后，会向服务器发送连接状态信息，服务器接收到连接状态信息后就会将<code>accept()</code>方法返回，提示连接成功。</p>
 <p>连接成功之后客户端就可以向socket中写入信息，服务器就能收到并读取相关信息。最后在发送完数据后，客户端就会关闭socket，紧接着服务端也需要关闭socket.</p>
 <p><strong>参考资料</strong></p>
-<p><a href="https://leetcode-cn.com/leetbook/read/networks-interview-highlights/eksi0s/" target="_blank" rel="noopener">LeetCode - 应用层</a></p>
-<p><a href="https://juejin.cn/post/6844904100035821575" target="_blank" rel="noopener">掘金 - HTTP灵魂之问</a></p>
+<ul>
+<li><p><a href="https://leetcode-cn.com/leetbook/read/networks-interview-highlights/eksi0s/" target="_blank" rel="noopener">LeetCode - 应用层</a></p>
+</li>
+<li><p><a href="https://juejin.cn/post/6844904100035821575" target="_blank" rel="noopener">掘金 - HTTP灵魂之问</a></p>
+</li>
+</ul>
 
       
 
