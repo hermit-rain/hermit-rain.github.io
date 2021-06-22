@@ -139,7 +139,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库索引</a>
+      <a class="article-title" href="/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93/">MySQL必知必会</a>
     </h1>
   
 
@@ -154,9 +154,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="如何设计一个关系型数据库"><a href="#如何设计一个关系型数据库" class="headerlink" title="如何设计一个关系型数据库"></a>如何设计一个关系型数据库</h1><img src="/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93/1.png" alt="1" style="zoom:67%;">
-
-<p>要设计一个关系型数据库，首先要将其划分为两大部分，即<strong>存储</strong>部分和<strong>程序实例</strong>部分。存储部分就类似于OS文件系统，将数据最终持久化存入磁盘中，即存入机械硬盘或者SSD固态硬盘中。程序实例部分要对存储部分进行逻辑上的管理，而程序实例部分包括<strong>将数据的逻辑关系转换成物理存储关系的存储管理模块</strong>、<strong>优化执行效率的缓存模块</strong>、<strong>将SQL语句进行解析的SQL解析模块</strong>、<strong>记录操作的日志管理模块</strong>、<strong>进行多用户管理的权限划分模块</strong>、<strong>灾难恢复的容灾机制模块</strong>、<strong>优化数据查询的索引管理模块</strong>、<strong>以及使得数据库支持并发操作的锁管理模块</strong>。</p>
+        <h1 id="数据库索引"><a href="#数据库索引" class="headerlink" title="数据库索引"></a>数据库索引</h1><h2 id="何为索引？为什么要使用索引？"><a href="#何为索引？为什么要使用索引？" class="headerlink" title="何为索引？为什么要使用索引？"></a>何为索引？为什么要使用索引？</h2><p><strong>索引是一种用于快速查询和检索数据的数据结构。常见的索引结构有: B 树， B+树和 Hash。</strong></p>
+<p>查询数据最基本的方式为全表扫描，即将整张表的数据全部或者分批次加载到内存中，<strong>磁盘存储的最小单位为块</strong>(512Byte)，由多行数据来组成。我们在查询数据时将块加载进内存，<strong>然后逐个块的去轮寻</strong>，找到目标数据即返回，这种查询方式是非常慢的，所以我们就需要引入一种更高效的查询机制即索引。<strong>索引的灵感来源于字典，类似于字典的目录</strong>。</p>
         
           <a class="article-more-a" href="/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93/#more">more >></a>
         
