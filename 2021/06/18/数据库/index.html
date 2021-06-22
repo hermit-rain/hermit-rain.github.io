@@ -21,9 +21,8 @@
 <meta property="og:image" content="http://yoursite.com/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93/7.png">
 <meta property="og:image" content="http://yoursite.com/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93/4.png">
 <meta property="og:image" content="http://yoursite.com/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93/5.png">
-<meta property="og:image" content="http://yoursite.com/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93/1.png">
 <meta property="article:published_time" content="2021-06-18T02:42:30.000Z">
-<meta property="article:modified_time" content="2021-06-22T03:43:06.107Z">
+<meta property="article:modified_time" content="2021-06-22T03:44:35.252Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
@@ -478,9 +477,7 @@
 <li>Next-key lock ：record+gap临键锁，锁定一个范围，包含记录本身</li>
 </ul>
 <h2 id="InnoDB为什么推荐使用自增ID作为主键"><a href="#InnoDB为什么推荐使用自增ID作为主键" class="headerlink" title="InnoDB为什么推荐使用自增ID作为主键"></a><code>InnoDB</code>为什么推荐使用自增ID作为主键</h2><p>自增ID可以保证每次插入时B+树索引是从右边扩展的，可以避免B+树频繁合并和分裂。如果使用字符串主键和随机主键，会使得数据随机插入，效率比较差。</p>
-<h1 id="如何设计一个关系型数据库"><a href="#如何设计一个关系型数据库" class="headerlink" title="如何设计一个关系型数据库"></a>如何设计一个关系型数据库</h1><img src="/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93/1.png" alt="1" style="zoom:67%;">
-
-<p>要设计一个关系型数据库，首先要将其划分为两大部分，即<strong>存储</strong>部分和<strong>程序实例</strong>部分。存储部分就类似于OS文件系统，将数据最终持久化存入磁盘中，即存入机械硬盘或者SSD固态硬盘中。程序实例部分要对存储部分进行逻辑上的管理，而程序实例部分包括<strong>将数据的逻辑关系转换成物理存储关系的存储管理模块</strong>、<strong>优化执行效率的缓存模块</strong>、<strong>将SQL语句进行解析的SQL解析模块</strong>、<strong>记录操作的日志管理模块</strong>、<strong>进行多用户管理的权限划分模块</strong>、<strong>灾难恢复的容灾机制模块</strong>、<strong>优化数据查询的索引管理模块</strong>、<strong>以及使得数据库支持并发操作的锁管理模块</strong>。</p>
+<h1 id="如何设计一个关系型数据库"><a href="#如何设计一个关系型数据库" class="headerlink" title="如何设计一个关系型数据库"></a>如何设计一个关系型数据库</h1><p>要设计一个关系型数据库，首先要将其划分为两大部分，即<strong>存储</strong>部分和<strong>程序实例</strong>部分。存储部分就类似于OS文件系统，将数据最终持久化存入磁盘中，即存入机械硬盘或者SSD固态硬盘中。程序实例部分要对存储部分进行逻辑上的管理，而程序实例部分包括<strong>将数据的逻辑关系转换成物理存储关系的存储管理模块</strong>、<strong>优化执行效率的缓存模块</strong>、<strong>将SQL语句进行解析的SQL解析模块</strong>、<strong>记录操作的日志管理模块</strong>、<strong>进行多用户管理的权限划分模块</strong>、<strong>灾难恢复的容灾机制模块</strong>、<strong>优化数据查询的索引管理模块</strong>、<strong>以及使得数据库支持并发操作的锁管理模块</strong>。</p>
 <h1 id="数据库理论范式"><a href="#数据库理论范式" class="headerlink" title="数据库理论范式"></a>数据库理论范式</h1><table>
 <thead>
 <tr>
