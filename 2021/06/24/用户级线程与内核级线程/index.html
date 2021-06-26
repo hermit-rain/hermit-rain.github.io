@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2021/6 | 鑫宇的个人博客</title>
+  <title>用户级线程与内核级线程 | 鑫宇的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="鑫宇的个人博客">
-<meta property="og:url" content="http://yoursite.com/archives/2021/06/index.html">
+  <meta name="description" content="多进程是操作系统的基本图像 用户级线程进程切换与线程切换的联系进程切换——&gt; 资源 (内存)+ 指令执行序列 线程切换——&gt;保留了并发的优点同时又避免了进程切换的代价(实质上就是映射表不变而PC指针变) 每个进程都包含一个映射表，如果进程切换了，那么程序选择的映射表也要跟着换。进程的切换主要包含两个部分即指令的切换 + 映射表的切换。其中指令的切换就是从这段程序跳到另外一段程序去执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用户级线程与内核级线程">
+<meta property="og:url" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/index.html">
 <meta property="og:site_name" content="鑫宇的个人博客">
+<meta property="og:description" content="多进程是操作系统的基本图像 用户级线程进程切换与线程切换的联系进程切换——&gt; 资源 (内存)+ 指令执行序列 线程切换——&gt;保留了并发的优点同时又避免了进程切换的代价(实质上就是映射表不变而PC指针变) 每个进程都包含一个映射表，如果进程切换了，那么程序选择的映射表也要跟着换。进程的切换主要包含两个部分即指令的切换 + 映射表的切换。其中指令的切换就是从这段程序跳到另外一段程序去执行">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/1.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/2.png">
+<meta property="article:published_time" content="2021-06-24T12:04:40.000Z">
+<meta property="article:modified_time" content="2021-06-26T13:38:14.092Z">
 <meta property="article:author" content="rain">
+<meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/1.png">
   
     <link rel="alternative" href="/atom.xml" title="鑫宇的个人博客" type="application/atom+xml">
   
@@ -130,36 +138,113 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-用户级线程与内核级线程" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2021-06-24T12:04:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/">用户级线程与内核级线程</a>
+    <h1 class="article-title" itemprop="name">
+      用户级线程与内核级线程
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        <!--显示阅读次数-->
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+            阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+  </span>
+  </a>
+
+        
+        <a href="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2021-06-24T12:04:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 多进程是操作系统的基本图像</p>
+<h1 id="用户级线程"><a href="#用户级线程" class="headerlink" title="用户级线程"></a>用户级线程</h1><h3 id="进程切换与线程切换的联系"><a href="#进程切换与线程切换的联系" class="headerlink" title="进程切换与线程切换的联系"></a>进程切换与线程切换的联系</h3><p>进程切换——&gt; 资源 (内存)+ 指令执行序列</p>
+<p>线程切换——&gt;保留了并发的优点同时又避免了进程切换的代价(实质上就是映射表不变而PC指针变)</p>
+<p>每个进程都包含一个映射表，如果进程切换了，那么程序选择的映射表也要跟着换。进程的切换主要包含两个部分即<strong>指令的切换</strong> + <strong>映射表的切换</strong>。其中指令的切换就是从这段程序跳到另外一段程序去执行，映射表的切换就是内存资源的切换。而<strong>线程的切换同属于一个进程里，不存在映射表的切换，只是指令的切换</strong>。所以在了解进程的切换之前，我们先来了解线程的切换，进程的切换就是在线程切换的基础上加上映射表的切换。</p>
+<a id="more"></a> 
+
+<h3 id="多线程实现浏览器网页的加载"><a href="#多线程实现浏览器网页的加载" class="headerlink" title="多线程实现浏览器网页的加载"></a>多线程实现浏览器网页的加载</h3><p>为什么 通常在网速比较慢的时候我们访问一个网站时，网页的加载过程通常是先出现一些文件，过了一会再出现图片、视频呢？</p>
+<p>因为浏览器向服务器发起访问的程序是一个进程，它包含多个线程，如：用来从服务器接收数据的线程、显示文本的线程、用来处理图片的线程以及用来显示图片的线程。设想一下，如果这些线程变成一个程序顺序执行会怎么样？</p>
+<p>如果依次执行，那么通常向服务器接收数据的线程会比较慢，只有在当前线程执行完毕才开始渲染显示，那么将有一段时间网页是空的，影响用户体验。那么网页的加载是如何实现的呢？</p>
+<p>多线程并发交替执行，当接收数据线程接收完文本数据后就切换到显示文本线程加载文本信息，之后再切换回去接收图片等数据再加载，交替执行。那么为什么加载网页的是多个线程的协同而不是多个进程呢？</p>
+<p>浏览器接收服务器的数据肯定都是存储在一个缓冲区中的，并且缓冲区是线程共享的。如果是多进程实现的话，那就必然会有多个映射表，接收收据的进程需要把数据写到自己的缓冲区上，而显示处理进程又需要从该缓冲区中拿到数据，因为地址是分离的，取数据时就会有数据拷贝的问题，特别麻烦。因为这些程序本身就涉及合作需要共享数据，所以就没有必要进行地址分离，完全可以在一块地址上进行。因此通过多线程实现就是最好的选择。</p>
+<h3 id="用户级线程切换的实现"><a href="#用户级线程切换的实现" class="headerlink" title="用户级线程切换的实现"></a>用户级线程切换的实现</h3><ul>
+<li><p>Yield——&gt; 核心切换</p>
+</li>
+<li><p>Create——&gt; 创造出第一次切换的样子</p>
+</li>
+</ul>
+<p><strong>要实现线程的切换我们首先需要创建两个线程</strong></p>
+<p><strong>线程1</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span>:A()			</span><br><span class="line">&#123;</span><br><span class="line">	B();</span><br><span class="line">	<span class="number">104</span>:</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">200</span>: B()</span><br><span class="line">&#123;</span><br><span class="line">	Yield1();	</span><br><span class="line">	<span class="number">204</span>:</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Yield1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">find</span> <span class="number">300</span>;</span><br><span class="line">	jmp <span class="number">300</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>线程2</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">300</span>:C()</span><br><span class="line">&#123;</span><br><span class="line">	D();</span><br><span class="line">	<span class="number">304</span>:</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">400</span>: D()</span><br><span class="line">&#123;</span><br><span class="line">	Yield2();</span><br><span class="line">	<span class="number">404</span>:</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Yield2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">find</span> <span class="number">204</span>;</span><br><span class="line">	jmp <span class="number">204</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>两个执行序列与一个栈 实现两个线程的切换</strong></p>
+<p>首先线程1中A()执行，然后跳到B()执行 ，并将函数返回地址104压栈。进入到B()之后将调用Yield1()，并将返回地址压栈，执行Yield1()函数将会跳到300处到线程2去执行，然后在C()函数中执行D()函数并将304压栈，跳到D()函数去执行。接着执行Yield2(),并将404压栈。此时栈中元素如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">104，204，304，404 &lt;(栈顶)</span><br></pre></td></tr></table></figure>
+
+<p>此时执行Yield2()函数，将跳到204，回到线程1处去执行。现在看似实现了两个线程的切换，但是继续执行将出大问题了？</p>
+<p>因为当跳回线程1中204的位置来执行。紧接着遇到了就是B()函数的 <code>}</code>，<strong>此处的 <code>}</code> 将会编译成一段汇编指令 <code>ret</code> 执行弹栈的操作。</strong>此时栈顶元素为404,执行弹栈操作后将会跳到404处即线程2去执行，所以问题就出现了。本来B()函数返回要回到当前线程的104处去执行，但是反而跑去线程2去执行了。为什么呢？？ ——&gt; <strong>两个线程共用了一个栈就是原罪</strong>，所以要想解决这个问题就要把一个栈变成两个栈，让两个线程在各自的栈中玩自己的就好了啊。这也是为什么一个进程中的多个线程要有自己私有的栈了~</p>
+<p><strong>从一个栈到两个栈</strong></p>
+<p>当从一个栈到两个栈转换后，执行以上操作此时栈中元素情况如下：</p>
+<p>线程1的栈</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">104，204 &lt;(栈顶)</span><br></pre></td></tr></table></figure>
+
+<p>TCB1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">esp &#x3D; 1000</span><br></pre></td></tr></table></figure>
+
+<p>线程2的栈</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">304， 404 &lt;(栈顶)</span><br></pre></td></tr></table></figure>
+
+<p>TCB2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">esp &#x3D; 2000</span><br></pre></td></tr></table></figure>
+
+<p><strong>此时每个线程各用一套栈</strong>，那么要想实现线程的切换就要考虑两套栈的切换。两套栈的切换这种动态的过程就需要记录存储当前状态的信息，即栈的信息要存放起来保证日后切回来的时候能找得到，这就需要一个数据结构来存储两套栈的地址信息了，此时<strong>线程控制块TCB</strong>出现了，<strong>TCB是一个全局的数据结构</strong>，专门用来记录两套栈的信息。 <code>esp</code>是物理寄存器，在CPU中,<code>esp</code>指向的即是当前栈的地址，把栈切换实质上就是<code>esp</code>寄存器的改变。</p>
+<p><strong>因为涉及到<code>esp</code>的改变所以我们要重写Yield()函数</strong>，我们主要分析下Yiele2()函数，重写后的Yield2()函数如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Yield2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TCB2.esp = esp;			<span class="comment">// 保存当前栈顶地址 当前esp -&gt; 2000</span></span><br><span class="line">	esp = TCB1.esp;			<span class="comment">// 切换栈 切换后 esp -&gt; 1000</span></span><br><span class="line">	jmp <span class="number">204</span>;				</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当前<code>esp</code>指向2000即线程2的栈顶元素地址，要想改变<code>esp</code>，首先要将2000保存在 TCB2中，然后将1000赋给<code>esp</code>，(1000为之前线程1跳到线程2时所保存在TCB1中的地址信息)。此时栈就已经切换回到线程1了。栈切换后接着就是PC的切换，PC切换后就要跳到204去执行。跳到204去执行紧接着就又会遇到B()函数的返回 <code>}</code>，此时又将执行弹栈操作，当前<code>esp</code>-&gt;1000 栈顶元素为204，<strong>所以弹栈204，并再次跳到204去执行</strong>(每次弹栈就要跳去执行)。<strong>那么问题就又出现了，我们不是刚刚从线程2切换回线程1执行完B()函数并返回嘛？？</strong>B()函数执行完应该回到104处去执行啊，怎么又要跳回204重新执行一遍呢？？</p>
+<p>因为在Yield2()这个函数中 jump 204是跳到204去执行，那么Yield2()函数就无法执行到 <code>}</code>，所以也就无法将204弹栈，因此导致204处多次执行。那么我们怎么办呢？？ ——&gt; 再次修改Yield2()函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Yield2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TCB2.esp = esp;			</span><br><span class="line">	esp = TCB1.esp;			</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当前Yield2()函数如上，删去了Jump204;仅仅保留了 栈的<code>esp</code>指针的切换。此时执行完Yield2()函数即执行完 <code>}</code>后，将执行弹栈操作，而此时栈已经切换回TCB1，栈顶元素正好是204，那就直接跳到204处去执行，204处执行完后，B()函数返回 <code>}</code>, 接着弹栈 104 再跳回 A() 函数中去执行。一切都变得完美了！！</p>
+<p>通过上面的分析我们发现，两个线程的样子即为<strong>1.两个栈、2.两个TCB、3.切换的PC在栈中</strong>。 <strong>TCB和栈相互配合即为线程切换的核心</strong>。 实现<code>TreadCreate</code> 的核心就是用程序做出这三样东西。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TreadCreate</span><span class="params">(A)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TCB *tcb = <span class="built_in">malloc</span>();</span><br><span class="line">	*<span class="built_in">stack</span> = <span class="built_in">malloc</span>();</span><br><span class="line">	*<span class="built_in">stack</span> = A; <span class="comment">//初始化栈顶即为A()函数100位置处</span></span><br><span class="line">	tcb.esp = <span class="built_in">stack</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 至此我们便可以通过 <code>ThreadCreate</code> 与 <code>Yield</code> 两个函数的配合实现用户级线程的切换了！</p>
+<h3 id="用户级线程的缺点"><a href="#用户级线程的缺点" class="headerlink" title="用户级线程的缺点"></a>用户级线程的缺点</h3><p>用户级线程是在用户态中切来切去，一般并不需要进入到内核，操作系统就感知不到其存在。当需要管理硬件的时候就要进入到内核，一旦遇到IO后操作系统CPU就会切换，因为操作系统感知不到用户级线程的存在也就不会将CPU执行权重新交回到当前进程去执行，而是去执行其他的进程，那么当前进程就要等待，对于一些时事性比较强的应用，用户体验会很差。这也是<code>Chrom</code>浏览器打开新标签采用多进程的原因~</p>
+ <img src="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/1.png" alt="1" style="zoom: 50%;">
+
+<h1 id="核心级线程"><a href="#核心级线程" class="headerlink" title="核心级线程"></a>核心级线程</h1><p>一个系统中往往是用户级线程和核心级线程同时存在的</p>
+<p> 一个系统如果不实现核心级线程，那多核实质上是没有用的，多核是建立在核心级线程的基础上的</p>
+<h2 id="多处理器和多核的区别"><a href="#多处理器和多核的区别" class="headerlink" title="多处理器和多核的区别"></a>多处理器和多核的区别</h2><p><img src="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/2.png" alt="2"></p>
+<p>多处理器：每一个CPU有自己的一套映射即MMU</p>
+<p>多核：多个CPU共用一套MMU</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -171,209 +256,119 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://hermit-rain.github.io/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/" class="archive-article-date">
-  	<time datetime="2021-06-18T02:42:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据库必知必会</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/">数据库必知必会</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#用户级线程"><span class="toc-number">1.</span> <span class="toc-text">用户级线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程切换与线程切换的联系"><span class="toc-number">1.0.1.</span> <span class="toc-text">进程切换与线程切换的联系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程实现浏览器网页的加载"><span class="toc-number">1.0.2.</span> <span class="toc-text">多线程实现浏览器网页的加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户级线程切换的实现"><span class="toc-number">1.0.3.</span> <span class="toc-text">用户级线程切换的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户级线程的缺点"><span class="toc-number">1.0.4.</span> <span class="toc-text">用户级线程的缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#核心级线程"><span class="toc-number">2.</span> <span class="toc-text">核心级线程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多处理器和多核的区别"><span class="toc-number">2.1.</span> <span class="toc-text">多处理器和多核的区别</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/06/14/HTTP%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" class="archive-article-date">
-  	<time datetime="2021-06-14T06:38:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-14</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/14/HTTP%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/">HTTP的前世今生</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">计网</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/06/11/TCP%E9%82%A3%E4%BA%9B%E4%BA%8B/" class="archive-article-date">
-  	<time datetime="2021-06-11T03:31:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/11/TCP%E9%82%A3%E4%BA%9B%E4%BA%8B/">TCP那些事</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">计网</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/06/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2021-06-07T05:40:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/">计算机网络概述</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">计网</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/06/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2021-06-03T06:38:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/">java多线程基础</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -401,8 +396,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
