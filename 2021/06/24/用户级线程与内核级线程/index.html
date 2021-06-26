@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>用户级线程与内核级线程 | 鑫宇的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="多进程是操作系统的基本图像 用户级线程进程切换与线程切换的联系进程切换——&gt; 资源 (内存)+ 指令执行序列 线程切换——&gt;保留了并发的优点同时又避免了进程切换的代价(实质上就是映射表不变而PC指针变) 每个进程都包含一个映射表，如果进程切换了，那么程序选择的映射表也要跟着换。进程的切换主要包含两个部分即指令的切换 + 映射表的切换。其中指令的切换就是从这段程序跳到另外一段程序去执行">
+  <meta name="description" content="用户级线程进程切换与线程切换的联系进程切换——&gt; 资源 (内存)+ 指令执行序列 线程切换——&gt;保留了并发的优点同时又避免了进程切换的代价(实质上就是映射表不变而PC指针变) 每个进程都包含一个映射表，如果进程切换了，那么程序选择的映射表也要跟着换。进程的切换主要包含两个部分即指令的切换 + 映射表的切换。其中指令的切换就是从这段程序跳到另外一段程序去执行，映射表的切换就是内存资源的切">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用户级线程与内核级线程">
 <meta property="og:url" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/index.html">
 <meta property="og:site_name" content="鑫宇的个人博客">
-<meta property="og:description" content="多进程是操作系统的基本图像 用户级线程进程切换与线程切换的联系进程切换——&gt; 资源 (内存)+ 指令执行序列 线程切换——&gt;保留了并发的优点同时又避免了进程切换的代价(实质上就是映射表不变而PC指针变) 每个进程都包含一个映射表，如果进程切换了，那么程序选择的映射表也要跟着换。进程的切换主要包含两个部分即指令的切换 + 映射表的切换。其中指令的切换就是从这段程序跳到另外一段程序去执行">
+<meta property="og:description" content="用户级线程进程切换与线程切换的联系进程切换——&gt; 资源 (内存)+ 指令执行序列 线程切换——&gt;保留了并发的优点同时又避免了进程切换的代价(实质上就是映射表不变而PC指针变) 每个进程都包含一个映射表，如果进程切换了，那么程序选择的映射表也要跟着换。进程的切换主要包含两个部分即指令的切换 + 映射表的切换。其中指令的切换就是从这段程序跳到另外一段程序去执行，映射表的切换就是内存资源的切">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/1.png">
 <meta property="og:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/2.png">
 <meta property="article:published_time" content="2021-06-24T12:04:40.000Z">
-<meta property="article:modified_time" content="2021-06-26T13:38:14.092Z">
+<meta property="article:modified_time" content="2021-06-26T13:41:28.049Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -168,8 +168,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p> 多进程是操作系统的基本图像</p>
-<h1 id="用户级线程"><a href="#用户级线程" class="headerlink" title="用户级线程"></a>用户级线程</h1><h3 id="进程切换与线程切换的联系"><a href="#进程切换与线程切换的联系" class="headerlink" title="进程切换与线程切换的联系"></a>进程切换与线程切换的联系</h3><p>进程切换——&gt; 资源 (内存)+ 指令执行序列</p>
+        <h1 id="用户级线程"><a href="#用户级线程" class="headerlink" title="用户级线程"></a>用户级线程</h1><h3 id="进程切换与线程切换的联系"><a href="#进程切换与线程切换的联系" class="headerlink" title="进程切换与线程切换的联系"></a>进程切换与线程切换的联系</h3><p>进程切换——&gt; 资源 (内存)+ 指令执行序列</p>
 <p>线程切换——&gt;保留了并发的优点同时又避免了进程切换的代价(实质上就是映射表不变而PC指针变)</p>
 <p>每个进程都包含一个映射表，如果进程切换了，那么程序选择的映射表也要跟着换。进程的切换主要包含两个部分即<strong>指令的切换</strong> + <strong>映射表的切换</strong>。其中指令的切换就是从这段程序跳到另外一段程序去执行，映射表的切换就是内存资源的切换。而<strong>线程的切换同属于一个进程里，不存在映射表的切换，只是指令的切换</strong>。所以在了解进程的切换之前，我们先来了解线程的切换，进程的切换就是在线程切换的基础上加上映射表的切换。</p>
 <a id="more"></a> 
