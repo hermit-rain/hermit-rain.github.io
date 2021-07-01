@@ -18,8 +18,11 @@
 <meta property="og:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/1.png">
 <meta property="og:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/2.png">
 <meta property="og:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/3.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/4.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/5.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/6.png">
 <meta property="article:published_time" content="2021-06-24T12:04:40.000Z">
-<meta property="article:modified_time" content="2021-06-30T15:31:10.078Z">
+<meta property="article:modified_time" content="2021-07-01T16:17:40.902Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -248,8 +251,77 @@
 <p>启用内核栈后，首先就会压入<code>源SS</code>和<code>源SP</code> (在用户态执行的栈)，同时压入<code>源PC</code>、<code>源CS</code> (在用户态执行的指令-&gt; 执行到哪里了-&gt; 方便跳回来后继续执行)。</p>
 <p>通过将用户栈的信息压栈就实现了用户栈与内核栈的相关联-&gt; 相当于从内核态向上拉了一条连接到用户态的链。</p>
 <p>同样当在内核栈中执行完需要返回到用户栈的时候便通过 <code>IRET</code>(中断)指令执行弹栈操作，根据栈底压入的用户栈信息就又返回到用户栈去执行了。</p>
-<h2 id="实例解析核心级线程的切换"><a href="#实例解析核心级线程的切换" class="headerlink" title="实例解析核心级线程的切换"></a>实例解析核心级线程的切换</h2><p>完成内核级线程的切换 </p>
-<p>switch_to(cur, next);  –&gt; cur : 当前线程的TCB  next : 下一个线程的TCB</p>
+<h2 id="实例解析核心级线程的切换"><a href="#实例解析核心级线程的切换" class="headerlink" title="实例解析核心级线程的切换"></a>实例解析核心级线程的切换</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span>:A()</span><br><span class="line">&#123;</span><br><span class="line">	B();</span><br><span class="line">	<span class="number">104</span>:</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">200</span>:B()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">read</span>();</span><br><span class="line">	<span class="number">204</span>:</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">300</span>:<span class="built_in">read</span>()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> <span class="number">0x80</span>;</span><br><span class="line">	<span class="number">304</span>:</span><br><span class="line">&#125;</span><br><span class="line">---------------------------------</span><br><span class="line">system_call:</span><br><span class="line">	call sys_read;</span><br><span class="line"><span class="number">1000</span>:</span><br><span class="line"><span class="number">2000</span>:sys_read()&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先A()函数调用B()函数将104压栈，执行B()函数并在B()函数中调用read()函数，read()是一个库函数，所以就会展开成一  段包含<code>int 0x80</code>的中断代码，此时该核心级线程从用户态跳到内核态去执行，同时用户栈将204压栈，并根据硬件寄存器启用对应的内核栈。</p>
+<p>此时用户栈信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">104, 204 &lt; (栈顶)</span><br></pre></td></tr></table></figure>
+
+<p><code>int</code>指令执行完毕紧接着将304压入内核栈，并将CS(段基址)压入栈，接着跳到system_call去执行，在system_call中查表调用系统函数sys_read(),同时将1000压栈。 此时内核栈信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SS : SP , EFLAGS , 304 , CS , 1000 &lt;(栈顶)</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/4.png" alt="4" style="zoom: 50%;">
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sys_read()&#123;</span><br><span class="line">	启动磁盘读；将自己变成阻塞；找到 next;</span><br><span class="line">	switch_to(cur, next);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时已经进入内核并执行系统函数 sys_read()，一旦执行sys_read()便会启动磁盘读，启动磁盘读自己就变成阻塞了，一阻塞就会让出CPU执行权引起调度。紧接着操作系统就会switch_to(cur，next)找到下一个线程并跳去执行。其中 - &gt; cur : 当前线程的TCB  next : 下一个线程的TCB (TCB中存储的即为各自内核栈的<code>esp</code>)</p>
+<img src="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/5.png" alt="5" style="zoom:67%;">
+
+
+
+<p> 如上图所示，我们根据TCB中的<code>esp</code> 切换TCB，此时便从线程S跳到线程T去执行了，紧接着执行的就是线程T的内核态代码，<strong>我们知道一个线程在执行的过程中一般绝大部分时间是在用户态执行的，只有当调用系统接口的时候才会进入到内核中去执行，溜达一圈之后会继续回到用户态去执行。</strong>所以此时线程T在内核态执行完后一定会回到用户态去执行。<strong>那么它如何返回到用户态去执行呢？</strong></p>
+<p><code>iret</code>中断返回 –&gt; 上图 线程T 的 “????” 处即为一段包含 <code>iret</code>的代码，根据中断返回-&gt;弹栈操作将线程T用户态的执行指令信息以及用户栈信息弹出并跳到用户态去执行即可！！！</p>
+<h2 id="内核级线程切换核心思想—switch-to五段论"><a href="#内核级线程切换核心思想—switch-to五段论" class="headerlink" title="内核级线程切换核心思想—switch_to五段论"></a>内核级线程切换核心思想—switch_to五段论</h2><img src="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/6.png" alt="6" style="zoom:67%;">
+
+<p><strong>switch_to(cur, next)五段论</strong></p>
+<ol>
+<li>首先要通过中断进入到内核；</li>
+<li>当需要切换时就要找到相应的TCB；</li>
+<li>完成TCB的切换；</li>
+<li>当TCB切换完之后就要 根据TCB完成内核栈的切换；</li>
+<li>内核栈切换完毕之后在通过<code>IRET</code>中断返回指令将相应的用户栈切回来；</li>
+</ol>
+<p>首先是线程S在用户态中执行，一旦经过系统中断便进入到内核态去执行，就会用内核栈，同时内核栈又与TCB相关联。一旦需要切换，就会根据线程S的TCB找到下一个线程的TCB即线程T的TCB，所以就完成了TCB的切换。而线程T的TCB对应有线程T的内核栈，也就同样可以根据TCB完成内核栈的切换。线程T的内核栈又关联着线程T的用户栈，就可以根据<code>IRET</code>中断返回指令切回到用户态去执行。以上便是核心级线程切换的思路！！</p>
+<h2 id="用户级线程VS核心级线程"><a href="#用户级线程VS核心级线程" class="headerlink" title="用户级线程VS核心级线程"></a>用户级线程VS核心级线程</h2><table>
+<thead>
+<tr>
+<th align="center">TYPE</th>
+<th align="center">用户级线程</th>
+<th align="center">核心级线程</th>
+<th align="center">用户+核心级线程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">利用多核</td>
+<td align="center">差</td>
+<td align="center">好</td>
+<td align="center">好</td>
+</tr>
+<tr>
+<td align="center">并发度</td>
+<td align="center">低</td>
+<td align="center">高</td>
+<td align="center">高</td>
+</tr>
+<tr>
+<td align="center">代价</td>
+<td align="center">小</td>
+<td align="center">大</td>
+<td align="center">中</td>
+</tr>
+<tr>
+<td align="center">内核改动</td>
+<td align="center">无</td>
+<td align="center">大</td>
+<td align="center">大</td>
+</tr>
+<tr>
+<td align="center">用户灵活性</td>
+<td align="center">大</td>
+<td align="center">小</td>
+<td align="center">大</td>
+</tr>
+</tbody></table>
 
       
 
@@ -362,7 +434,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#用户级线程"><span class="toc-number">1.</span> <span class="toc-text">用户级线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程切换与线程切换的联系"><span class="toc-number">1.0.1.</span> <span class="toc-text">进程切换与线程切换的联系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程实现浏览器网页的加载"><span class="toc-number">1.0.2.</span> <span class="toc-text">多线程实现浏览器网页的加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户级线程切换的实现"><span class="toc-number">1.0.3.</span> <span class="toc-text">用户级线程切换的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户级线程的缺点"><span class="toc-number">1.0.4.</span> <span class="toc-text">用户级线程的缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#核心级线程"><span class="toc-number">2.</span> <span class="toc-text">核心级线程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多处理器和多核的区别"><span class="toc-number">2.1.</span> <span class="toc-text">多处理器和多核的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#从两个栈到两套栈"><span class="toc-number">2.2.</span> <span class="toc-text">从两个栈到两套栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户栈与内核栈的关联"><span class="toc-number">2.3.</span> <span class="toc-text">用户栈与内核栈的关联</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例解析核心级线程的切换"><span class="toc-number">2.4.</span> <span class="toc-text">实例解析核心级线程的切换</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#用户级线程"><span class="toc-number">1.</span> <span class="toc-text">用户级线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程切换与线程切换的联系"><span class="toc-number">1.0.1.</span> <span class="toc-text">进程切换与线程切换的联系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程实现浏览器网页的加载"><span class="toc-number">1.0.2.</span> <span class="toc-text">多线程实现浏览器网页的加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户级线程切换的实现"><span class="toc-number">1.0.3.</span> <span class="toc-text">用户级线程切换的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户级线程的缺点"><span class="toc-number">1.0.4.</span> <span class="toc-text">用户级线程的缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#核心级线程"><span class="toc-number">2.</span> <span class="toc-text">核心级线程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多处理器和多核的区别"><span class="toc-number">2.1.</span> <span class="toc-text">多处理器和多核的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#从两个栈到两套栈"><span class="toc-number">2.2.</span> <span class="toc-text">从两个栈到两套栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户栈与内核栈的关联"><span class="toc-number">2.3.</span> <span class="toc-text">用户栈与内核栈的关联</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例解析核心级线程的切换"><span class="toc-number">2.4.</span> <span class="toc-text">实例解析核心级线程的切换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内核级线程切换核心思想—switch-to五段论"><span class="toc-number">2.5.</span> <span class="toc-text">内核级线程切换核心思想—switch_to五段论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户级线程VS核心级线程"><span class="toc-number">2.6.</span> <span class="toc-text">用户级线程VS核心级线程</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
