@@ -132,6 +132,92 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-操作系统的启动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%90%AF%E5%8A%A8/">操作系统的启动</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+        
+        <a href="/2021/05/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%90%AF%E5%8A%A8/" class="archive-article-date">
+  	<time datetime="2021-05-20T11:19:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="打开电源那神秘的黑色背后发生着什么"><a href="#打开电源那神秘的黑色背后发生着什么" class="headerlink" title="打开电源那神秘的黑色背后发生着什么"></a>打开电源那神秘的黑色背后发生着什么</h2><ol>
+<li>x86 PC刚开机时CPU处于实模式 （实模式即16bit，保护模式即32bit）</li>
+<li>开始时，CS = 0xFFFF；IP = 0x0000；（CS-&gt; 段寄存器；IP-&gt;段内偏移; <strong>CS &lt;&lt; 4 + IP = 物理地址</strong>）</li>
+<li>寻址 0xFFFF0(ROM BIOS 映射区)  （BIOS -&gt; Basic Input Output System；固化到内存地址为 0xFFFF0 处的一段代码）</li>
+<li>检查RAM，键盘，显示器，软硬磁盘</li>
+<li>将磁盘0磁道0扇区读入 0x7c00处 （0磁道0扇区为操作系统的引导扇区共 512byte）</li>
+<li>设置CS = 0x07c0; IP = 0x0000;</li>
+<li>寻址 0x7c00 开始执行操作系统引导扇区的代码</li>
+</ol>
+        
+          <a class="article-more-a" href="/2021/05/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%90%AF%E5%8A%A8/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%90%AF%E5%8A%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-操作系统概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

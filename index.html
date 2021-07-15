@@ -132,6 +132,125 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java集合" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/15/Java%E9%9B%86%E5%90%88/">Java集合</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+        
+        <a href="/2021/07/15/Java%E9%9B%86%E5%90%88/" class="archive-article-date">
+  	<time datetime="2021-07-15T05:39:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="java集合"><a href="#java集合" class="headerlink" title="java集合"></a>java集合</h2><h4 id="list-有序的，可以重复"><a href="#list-有序的，可以重复" class="headerlink" title="list  有序的，可以重复"></a>list  有序的，可以重复</h4><ul>
+<li>ArrayList    –&gt; 数组实现   查找快、增删慢 </li>
+<li>Vector –&gt; 古老版本 –&gt; 线程安全的 List</li>
+<li>LinkedList –&gt;   双向链表  —-&gt; 查找慢、 增删 快</li>
+</ul>
+<h4 id="set-：-无序的不可以重复"><a href="#set-：-无序的不可以重复" class="headerlink" title="set ： 无序的不可以重复"></a>set ： 无序的不可以重复</h4><ul>
+<li>HashSet  –&gt; 基于HashMap实现</li>
+<li>TreeSet –&gt;  基于TreeMap 实现</li>
+<li>EnumSet –&gt; 枚举 set 集合 </li>
+</ul>
+<h4 id="queue-：-队列"><a href="#queue-：-队列" class="headerlink" title="queue ： 队列"></a>queue ： 队列</h4><ul>
+<li>Socket ???—-&gt; 不可用了已经</li>
+<li>PriorityQueue –&gt;  优先级队列</li>
+<li>Deque</li>
+</ul>
+<h5 id="map-：-存储键值对-–-gt-键不可以重复"><a href="#map-：-存储键值对-–-gt-键不可以重复" class="headerlink" title="map ： 存储键值对 –&gt; 键不可以重复"></a>map ： 存储键值对 –&gt; 键不可以重复</h5><ul>
+<li>HashMap   —&gt;  数组 + 链表 + 红黑树  /  数组  + 链表  </li>
+<li>HashTable —&gt;古老版本的 –&gt; 线程安全</li>
+<li>ConcurrentHashMap </li>
+<li>TreeMap  –&gt;  实现接口 —&gt; 定制排序 + 自然排序两种</li>
+<li>EnumMap —-&gt; 枚举Map</li>
+</ul>
+<p><code>add()</code>    <code>remove()</code>       <code>set()</code>     <code>get()</code>     —&gt; 增 删 改 查</p>
+<p>添加或者删除的都是  Object类 的对象 ，对于基本数据类型 java 会自动装箱 （编译类型 – 运行类型）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">list.add(<span class="number">666</span>); ---&gt; list.add(<span class="keyword">new</span> Integer(<span class="number">666</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>集合的遍历方法</p>
+<ul>
+<li><p>迭代器   Iterator – &gt; 只是迭代器 用于遍历集合 <strong>并不存储数据</strong> –&gt; 类似于游标 – 常用方法 -&gt; hasNext()  /  next()</p>
+</li>
+<li><p>for each  –&gt; for 增强本质也是迭代器  object.for</p>
+</li>
+</ul>
+<p>整体的集合结构(画张类及接口的关系图)</p>
+<p>接口  –&gt; List</p>
+<p>实现类 –&gt; ArrayList</p>
+<p>实现类描述 –&gt;   底层实现</p>
+<p>实现类方法 –&gt; <code>get()</code>  / <code>add()</code></p>
+<p>方法详解答 –&gt;  <code>get()</code> 的底层实现 …..</p>
+<p>显示所有的快捷键的快捷键 –&gt;  ctrl + j</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/15/Java%E9%9B%86%E5%90%88/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CPU的调度策略" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -820,92 +939,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/05/23/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-操作系统的启动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%90%AF%E5%8A%A8/">操作系统的启动</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/05/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%90%AF%E5%8A%A8/" class="archive-article-date">
-  	<time datetime="2021-05-20T11:19:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="打开电源那神秘的黑色背后发生着什么"><a href="#打开电源那神秘的黑色背后发生着什么" class="headerlink" title="打开电源那神秘的黑色背后发生着什么"></a>打开电源那神秘的黑色背后发生着什么</h2><ol>
-<li>x86 PC刚开机时CPU处于实模式 （实模式即16bit，保护模式即32bit）</li>
-<li>开始时，CS = 0xFFFF；IP = 0x0000；（CS-&gt; 段寄存器；IP-&gt;段内偏移; <strong>CS &lt;&lt; 4 + IP = 物理地址</strong>）</li>
-<li>寻址 0xFFFF0(ROM BIOS 映射区)  （BIOS -&gt; Basic Input Output System；固化到内存地址为 0xFFFF0 处的一段代码）</li>
-<li>检查RAM，键盘，显示器，软硬磁盘</li>
-<li>将磁盘0磁道0扇区读入 0x7c00处 （0磁道0扇区为操作系统的引导扇区共 512byte）</li>
-<li>设置CS = 0x07c0; IP = 0x0000;</li>
-<li>寻址 0x7c00 开始执行操作系统引导扇区的代码</li>
-</ol>
-        
-          <a class="article-more-a" href="/2021/05/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%90%AF%E5%8A%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%90%AF%E5%8A%A8/">展开全文 >></a>
         </p>
       
 
