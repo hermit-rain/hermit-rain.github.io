@@ -159,46 +159,9 @@
 <li>Vector –&gt; 古老版本 –&gt; 线程安全的 List</li>
 <li>LinkedList –&gt;   双向链表  —-&gt; 查找慢、 增删 快</li>
 </ul>
-<h4 id="set-：-无序的不可以重复"><a href="#set-：-无序的不可以重复" class="headerlink" title="set ： 无序的不可以重复"></a>set ： 无序的不可以重复</h4><ul>
-<li>HashSet  –&gt; 基于HashMap实现</li>
-<li>TreeSet –&gt;  基于TreeMap 实现</li>
-<li>EnumSet –&gt; 枚举 set 集合 </li>
-</ul>
-<h4 id="queue-：-队列"><a href="#queue-：-队列" class="headerlink" title="queue ： 队列"></a>queue ： 队列</h4><ul>
-<li>Socket ???—-&gt; 不可用了已经</li>
-<li>PriorityQueue –&gt;  优先级队列</li>
-<li>Deque</li>
-</ul>
-<h5 id="map-：-存储键值对-–-gt-键不可以重复"><a href="#map-：-存储键值对-–-gt-键不可以重复" class="headerlink" title="map ： 存储键值对 –&gt; 键不可以重复"></a>map ： 存储键值对 –&gt; 键不可以重复</h5><ul>
-<li>HashMap   —&gt;  数组 + 链表 + 红黑树  /  数组  + 链表  </li>
-<li>HashTable —&gt;古老版本的 –&gt; 线程安全</li>
-<li>ConcurrentHashMap </li>
-<li>TreeMap  –&gt;  实现接口 —&gt; 定制排序 + 自然排序两种</li>
-<li>EnumMap —-&gt; 枚举Map</li>
-</ul>
-<p><code>add()</code>    <code>remove()</code>       <code>set()</code>     <code>get()</code>     —&gt; 增 删 改 查</p>
-<p>添加或者删除的都是  Object类 的对象 ，对于基本数据类型 java 会自动装箱 （编译类型 – 运行类型）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">list.add(<span class="number">666</span>); ---&gt; list.add(<span class="keyword">new</span> Integer(<span class="number">666</span>));</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>集合的遍历方法</p>
-<ul>
-<li><p>迭代器   Iterator – &gt; 只是迭代器 用于遍历集合 <strong>并不存储数据</strong> –&gt; 类似于游标 – 常用方法 -&gt; hasNext()  /  next()</p>
-</li>
-<li><p>for each  –&gt; for 增强本质也是迭代器  object.for</p>
-</li>
-</ul>
-<p>整体的集合结构(画张类及接口的关系图)</p>
-<p>接口  –&gt; List</p>
-<p>实现类 –&gt; ArrayList</p>
-<p>实现类描述 –&gt;   底层实现</p>
-<p>实现类方法 –&gt; <code>get()</code>  / <code>add()</code></p>
-<p>方法详解答 –&gt;  <code>get()</code> 的底层实现 …..</p>
-<p>显示所有的快捷键的快捷键 –&gt;  ctrl + j</p>
-
+        
+          <a class="article-more-a" href="/2021/07/15/Java%E9%9B%86%E5%90%88/#more">more >></a>
+        
       
 
       
