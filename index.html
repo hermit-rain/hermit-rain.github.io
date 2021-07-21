@@ -132,6 +132,116 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-排序算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/21/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+        
+        <a href="/2021/07/21/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2021-07-21T03:38:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>*<em>交换法    *</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt;= <span class="number">1</span> &amp;&amp; arr[j] &lt; arr[j - <span class="number">1</span>]; j--) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">            arr[j] = arr[j - <span class="number">1</span>];</span><br><span class="line">            arr[j - <span class="number">1</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>移动法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> curInsertValue = arr[i]; <span class="comment">//先将待插入的元素存储起来 --&gt; 前面的元素后移会覆盖它</span></span><br><span class="line">        <span class="keyword">int</span> j = i - <span class="number">1</span>; <span class="comment">//从待插入的元素前一个元素开始逐个遍历 并 与待插入元素比较 如果大于待插入元素则向后移动</span></span><br><span class="line">        <span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; arr[j] &gt; curInsertValue) &#123;</span><br><span class="line">            arr[j + <span class="number">1</span>] = arr[j];</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//循环跳出后 --&gt;前面有序数列中空出的位置即为待插入元素的位置 --&gt; 直接赋值即可</span></span><br><span class="line">        arr[j + <span class="number">1</span>] = curInsertValue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><h4 id="快速排序的基本思想"><a href="#快速排序的基本思想" class="headerlink" title="快速排序的基本思想"></a>快速排序的基本思想</h4><ul>
+<li>从数组中取出一个数，称之为基数（pivot）</li>
+<li>遍历数组，将比基数大的数字放到它的右边，比基数小的数字放到它的左边。遍历完成后，数组被分成了左右两个区域</li>
+<li>将左右两个区域视为两个数组，重复前两个步骤，递归排序即可</li>
+</ul>
+<h4 id="基准元素的选择"><a href="#基准元素的选择" class="headerlink" title="基准元素的选择"></a>基准元素的选择</h4><p>快速排序是首先定义基准元素 –&gt; 基准元素的选取一般分三种</p>
+<ul>
+<li>数组起始元素–&gt; 下标为0</li>
+<li>数组的末尾元素 –&gt; 下标为 <code>arr.length - 1</code></li>
+<li>随机选取</li>
+</ul>
+<p>选择的基数不同，算法的实现也不同。实际上随机选取的方式的平均时间复杂度是最优的。</p>
+<h4 id="分区方法的设计"><a href="#分区方法的设计" class="headerlink" title="分区方法的设计"></a>分区方法的设计</h4><p>分区方法的目的包括</p>
+<ul>
+<li>将当前数组元素按照基准元素分区，将比基数大的数字放到它的右边，比基数小的数字放到它的左边。</li>
+<li>返回当前基准元素的下标 ，为接下来的递归分区确定边界。 –&gt; 基准值的下标在分区的过程是不断变化的</li>
+</ul>
+<h4 id="递归推出的条件"><a href="#递归推出的条件" class="headerlink" title="递归推出的条件"></a>递归推出的条件</h4><p>我们定义两个指针L， R， 初始分别指向数组的起始和末尾位置  –&gt; L = 0; R =<code>arr.length</code></p>
+<p>在递归的过程中根据<strong>基准元素下标的变化</strong>动态的调整 L 及 R ,当 <strong>L &gt;= R 时即退出递归</strong></p>
+<ul>
+<li>L = R ：分区中只有一个元素 </li>
+<li>L &gt; R：分区中没有元素</li>
+</ul>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><p><strong>1、移动–&gt; 挖坑填坑法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (L &gt; R) <span class="keyword">return</span>;  <span class="comment">//递归推出的条件</span></span><br><span class="line">    <span class="keyword">int</span> pivotIndex = partition(arr, L, R); <span class="comment">//将数组分区,并返回基准值下标</span></span><br><span class="line">    quickSort(arr, L, pivotIndex - <span class="number">1</span>); <span class="comment">//对左侧分区进行递归排序</span></span><br><span class="line">    quickSort(arr, pivotIndex + <span class="number">1</span>, R); <span class="comment">//对右侧分区进行递归排序</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = L;</span><br><span class="line">    <span class="keyword">int</span> right = R;</span><br><span class="line">    <span class="keyword">int</span> pivot = arr[left]; <span class="comment">//选取数组起始元素为基准值</span></span><br><span class="line">    <span class="keyword">while</span> (left != right) &#123;</span><br><span class="line">        <span class="comment">//从右向左遍历找到第一个小于基准值的元素</span></span><br><span class="line">        <span class="keyword">while</span> (right &gt; left &amp;&amp; arr[right] &gt;= pivot) right--;</span><br><span class="line">        arr[left] = arr[right]; <span class="comment">//挖坑-&gt; 将right位置处的元素挖走放到 left处</span></span><br><span class="line">        <span class="comment">//从左向右遍历找到第一个比基准值大的元素</span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right &amp;&amp; arr[left] &lt;= pivot) left++;</span><br><span class="line">        arr[right] = arr[left]; <span class="comment">//填坑 -&gt; 将当前left处的元素填到之前挖走的 right地址处</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//退出循环时-&gt; 基准元素左侧全部小于基准值，基准元素右侧全部大于基准值</span></span><br><span class="line">    arr[right] = pivot; <span class="comment">//将基准值归位</span></span><br><span class="line">    <span class="keyword">return</span> left; <span class="comment">//返回基准值的当前下标位置,为之后递归分区确定边界, 此时left == right 都指向基准值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、交换法实现分区方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (L &gt; R) <span class="keyword">return</span>;  </span><br><span class="line">    <span class="keyword">int</span> pivotIndex = partition(arr, L, R);</span><br><span class="line">    quickSort(arr, L, pivotIndex - <span class="number">1</span>);</span><br><span class="line">    quickSort(arr, pivotIndex + <span class="number">1</span>, R);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = L;</span><br><span class="line">    <span class="keyword">int</span> right = R;</span><br><span class="line">    <span class="keyword">int</span> pivot = arr[left]; <span class="comment">//定义基准值</span></span><br><span class="line">    <span class="keyword">while</span> (left != right) &#123;</span><br><span class="line">        <span class="keyword">while</span> (right &gt; left &amp;&amp; arr[right] &gt;= pivot) right--;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right &amp;&amp; arr[left] &lt;= pivot) left++;</span><br><span class="line">        swap(arr, left, right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//退出循环后 left 及 right 相等 -&gt; 同时指向从左到右最后一个小于基准值的元素</span></span><br><span class="line">    swap(arr, left, L); <span class="comment">//将基准值归位 --&gt; 此时基准元素左侧全部小于基准值 基准元素右侧全部大于基准值</span></span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/21/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java集合" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -853,86 +963,6 @@
 
 
   
-    <article id="post-系统调用的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/23/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">系统调用的实现</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/05/23/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-  	<time datetime="2021-05-23T07:09:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="操作系统的接口"><a href="#操作系统的接口" class="headerlink" title="操作系统的接口"></a>操作系统的接口</h2><p>接口即一些函数，操作系统为上层应用提供一种进入到内核中的手段</p>
-<p>接口表现为函数调用又由系统提供，所以称为<strong>系统调用</strong></p>
-<h3 id="操作系统向上连接的并不是用户而是应用程序"><a href="#操作系统向上连接的并不是用户而是应用程序" class="headerlink" title="操作系统向上连接的并不是用户而是应用程序"></a>操作系统向上连接的并不是用户而是应用程序</h3><p>接口是计算机系统中两个独立的部件进行信息交换的共享边界，应用程序与操作系统之间存在接口，操作系统和计算机硬件之间也存在接口。通过接口可以实现应用程序与操作系统之间的通信和操作系统与计算机硬件之间的通信。由此可见与操作系统相连接的并不是用户，而是应用程序。</p>
-        
-          <a class="article-more-a" href="/2021/05/23/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/23/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1049,6 +1079,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
