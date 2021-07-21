@@ -8,18 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>排序算法 | 鑫宇的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="插入排序*交换法    * 123456789public void insertSort(int[] arr) &amp;#123;    for (int i &#x3D; 1; i &lt; arr.length; i++) &amp;#123;        for (int j &#x3D; i; j &gt;&#x3D; 1 &amp;&amp; arr[j] &lt; arr[j - 1]; j--) &amp;#123;">
+  <meta name="description" content="排序算法概述排序算法主要分为内部排序和外部排序两大类别  内部排序 ：将数据加载进内存进行排序 外部排序 ：使用内存和外存相结合的方式对数据进行排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序算法">
 <meta property="og:url" content="http://yoursite.com/2021/07/21/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="鑫宇的个人博客">
-<meta property="og:description" content="插入排序*交换法    * 123456789public void insertSort(int[] arr) &amp;#123;    for (int i &#x3D; 1; i &lt; arr.length; i++) &amp;#123;        for (int j &#x3D; i; j &gt;&#x3D; 1 &amp;&amp; arr[j] &lt; arr[j - 1]; j--) &amp;#123;">
+<meta property="og:description" content="排序算法概述排序算法主要分为内部排序和外部排序两大类别  内部排序 ：将数据加载进内存进行排序 外部排序 ：使用内存和外存相结合的方式对数据进行排序">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2021/07/21/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/0.png">
 <meta property="article:published_time" content="2021-07-21T03:38:43.000Z">
-<meta property="article:modified_time" content="2021-07-21T03:40:34.548Z">
+<meta property="article:modified_time" content="2021-07-21T04:02:40.209Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/07/21/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/0.png">
   
     <link rel="alternative" href="/atom.xml" title="鑫宇的个人博客" type="application/atom+xml">
   
@@ -165,7 +167,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>*<em>交换法    *</em></p>
+        <h2 id="排序算法概述"><a href="#排序算法概述" class="headerlink" title="排序算法概述"></a>排序算法概述</h2><p>排序算法主要分为内部排序和外部排序两大类别</p>
+<ul>
+<li>内部排序 ：将数据加载进内存进行排序</li>
+<li>外部排序 ：使用内存和外存相结合的方式对数据进行排序</li>
+</ul>
+<a id="more"></a>  
+
+<img src="/2021/07/21/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/0.png" alt="0"> 
+
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p><strong>交换法</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt;= <span class="number">1</span> &amp;&amp; arr[j] &lt; arr[j - <span class="number">1</span>]; j--) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">            arr[j] = arr[j - <span class="number">1</span>];</span><br><span class="line">            arr[j - <span class="number">1</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>移动法</strong></p>
@@ -312,7 +323,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#插入排序"><span class="toc-number">1.</span> <span class="toc-text">插入排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速排序"><span class="toc-number">2.</span> <span class="toc-text">快速排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#快速排序的基本思想"><span class="toc-number">2.0.1.</span> <span class="toc-text">快速排序的基本思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基准元素的选择"><span class="toc-number">2.0.2.</span> <span class="toc-text">基准元素的选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分区方法的设计"><span class="toc-number">2.0.3.</span> <span class="toc-text">分区方法的设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#递归推出的条件"><span class="toc-number">2.0.4.</span> <span class="toc-text">递归推出的条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-number">2.0.5.</span> <span class="toc-text">代码实现</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#排序算法概述"><span class="toc-number">1.</span> <span class="toc-text">排序算法概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入排序"><span class="toc-number">2.</span> <span class="toc-text">插入排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速排序"><span class="toc-number">3.</span> <span class="toc-text">快速排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#快速排序的基本思想"><span class="toc-number">3.0.1.</span> <span class="toc-text">快速排序的基本思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基准元素的选择"><span class="toc-number">3.0.2.</span> <span class="toc-text">基准元素的选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分区方法的设计"><span class="toc-number">3.0.3.</span> <span class="toc-text">分区方法的设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#递归推出的条件"><span class="toc-number">3.0.4.</span> <span class="toc-text">递归推出的条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-number">3.0.5.</span> <span class="toc-text">代码实现</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
