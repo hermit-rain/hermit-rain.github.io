@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/06/11/TCP%E9%82%A3%E4%BA%9B%E4%BA%8B/5.png">
 <meta property="og:image" content="http://yoursite.com/2021/06/11/TCP%E9%82%A3%E4%BA%9B%E4%BA%8B/6.png">
 <meta property="article:published_time" content="2021-06-11T03:31:14.000Z">
-<meta property="article:modified_time" content="2021-07-20T12:49:51.910Z">
+<meta property="article:modified_time" content="2021-07-21T12:55:13.608Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="计网">
 <meta name="twitter:card" content="summary">
@@ -412,7 +412,7 @@
 <h3 id="慢启动-cwnd-lt-ssthresh"><a href="#慢启动-cwnd-lt-ssthresh" class="headerlink" title="慢启动 (cwnd &lt; ssthresh)"></a>慢启动 (<code>cwnd</code> &lt; <code>ssthresh</code>)</h3><p>刚开始进入传输数据的时候，你是不知道现在的网路到底是稳定还是拥堵的，如果做的太激进，发包太急，那么疯狂丢包，造成雪崩式的网络灾难。拥塞控制首先就是要采用一种保守的慢启动算法来慢慢地适应整个网路。</p>
 <ol>
 <li>三次握手后，双发宣告自己的接收窗口<code>rwnd</code>大小；</li>
-<li>初始化 拥塞窗口<code>cwnd</code> 大小，一般位一个<code>MSS</code>,初始化 <code>ssthresh</code>慢启动门限 ，大多数TCP实现中 <code>ssthresh</code> = 65536Byte;</li>
+<li>初始化 拥塞窗口<code>cwnd</code> 大小，一般为一个<code>MSS</code>,初始化 <code>ssthresh</code>慢启动门限 ，大多数TCP实现中 <code>ssthresh</code> = 65536Byte;</li>
 <li><code>cwnd</code> 呈指数增长，当收到ACK确认后 拥塞窗口就翻倍；</li>
 <li>当<code>cwnd</code> &gt;= <code>ssthresh</code> 时，切换为拥塞避免算法；</li>
 </ol>
@@ -423,7 +423,7 @@
 </ol>
 <p><strong>问题引入：前面两个机制都是在没有检测到拥塞的情况下，那么当出现拥赛,<code>cwnd</code> 该如何调整呢？</strong></p>
 <ol>
-<li>重传计时器超时间  Timeout ，判断网络出现了拥塞；</li>
+<li>重传计时器超时间 Timeout ，判断网络出现了拥塞；</li>
 <li>将<code>ssthresh</code>的值更新为发生拥塞时的 <code>cwnd</code> 的一半</li>
 <li>拥塞窗口 <code>cwnd</code> 重置成  1 <code>MSS</code></li>
 <li>整完后重新进行慢开始算法</li>
