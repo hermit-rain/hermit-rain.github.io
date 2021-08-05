@@ -132,6 +132,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JVM垃圾回收机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">JVM垃圾回收机制</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+        
+        <a href="/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" class="archive-article-date">
+  	<time datetime="2021-08-04T02:03:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="对象被判定为垃圾的标准"><a href="#对象被判定为垃圾的标准" class="headerlink" title="对象被判定为垃圾的标准"></a>对象被判定为垃圾的标准</h2><p>对于java对象来讲，当没有被任何对象所引用时，该对象就是没用的。对于系统而言它就是垃圾，其占据的内存就要被释放，同时该对象也要被销毁。</p>
+<p><strong>判断对象是否为垃圾的算法</strong></p>
+<ul>
+<li>引用计数算法</li>
+<li>可达性分析算法</li>
+</ul>
+<h4 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h4><ul>
+<li>通过判断对象的引用数量来判断对象是否可以被回收；</li>
+<li>每个对象实例都是一个引用计数器，被引用则 + 1，完成引用则 - 1；</li>
+<li>任何引用计数为0的对象实例可以被当作垃圾收集；</li>
+</ul>
+<p>引用计数算法通过判断对象的引用数量来决定对象是否可以被回收。在这种机制下，<strong>堆中的每一个对象实例都有一个引用计数器</strong>，当一个对象被创建时，若该对象实例分配给一个引用变量，该对象实例的引用变量则会被置为1，若该对象又被另一个对象所引用，则该对象的引用计数器继续+1。而当<strong>该对象的实例的某个引用</strong>超过了生命周期或者被置为一个新值时，该对象实例的引用计数器将会 -1，比如在某个方法中定义了一个引用变量，指向该对象实例，当方法结束的时，由于该引用变量是局部变量，存储在虚拟机栈上，方法结束后会被自动干掉，此时该实例变量的引用计数器便会 - 1。任何引用计数为 0 的对象实例都可以被当做垃圾收集。</p>
+<p>采用此类算法的优势是可以快速的执行，因为我们只要过滤出引用计数为 0 的对象实例，将其内存回收即可，可以交织在程序运行中。由于垃圾回收的时候几乎不打断程序的执行，因此对程序需要不被长时间打断的实时环境有利 。<strong>这个方法实现简单，效率高，但是目前主流的虚拟机中并没有选择这个算法来管理内存，其最主要的原因是它很难解决对象之间相互循环引用的问题</strong>。如父对象有一个对子对象的引用，子对象又返回来引用父对象，这样引用计数永远不可能为 0。</p>
+<h4 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h4><p>通过判断对象的引用链是否可达来决定对象是否可以被回收。</p>
+<p>主流的java垃圾回收机制用的是可达性分析算法来对垃圾进行标记。可达性分析算法是通过判断对象的引用链是否可达来决定对象是否可以被回收的。可达性算法是从离散数学的图论引入的，程序把所有的引用关系看成一张图，通过一系列的名为 GC Root 的对象作为起始点，从这些起始点向下搜索，搜索所走过的路径被称做引用链。当一个对象从GC Root 开始没有与任何引用链相连，那么从图论上来说，即从GC Root 到该对象是不可达的，此时证明该对象是不可用的，它也就会被标记为垃圾。</p>
+<img src="/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210805200054715.png" alt="image-20210805200054715" style="zoom: 80%;">
+
+<p>如上图所示，垃圾回收器会对内存中的整个对象进行遍历，从GC 根 ，即GC Root 开始，到根对象引用的其他对象，回收器将访问到的所有对象标记为存活，存活的对象在图中被标记为蓝色，即 Object 1、Object 2、Object 3，均为可达对象。在所有标记阶段被完成之后，所有存活对象已被标记完毕，其他那些比如图中灰色部分 Object 4、Object 5 就是GC 根对象不可达的对象，也就意味着应用不会在用到他们，回收器将会在回收阶段清除它们。</p>
+<p><strong>可以作为 GC Root 的对象</strong></p>
+<ul>
+<li>虚拟机栈中引用的对象 ： 比如java方法中new 了一个 Object 并赋值给一个局部变量</li>
+<li>方法区中的常量引用的对象</li>
+<li>方法区中的类静态属性引用的对象</li>
+<li>本地方法栈中 JNI(Native方法) 的引用对象</li>
+<li>活跃线程的引用对象</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-排序算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -823,88 +924,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/06/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-步入Linux的世界" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/26/%E6%AD%A5%E5%85%A5Linux%E7%9A%84%E4%B8%96%E7%95%8C/">步入Linux的世界</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/05/26/%E6%AD%A5%E5%85%A5Linux%E7%9A%84%E4%B8%96%E7%95%8C/" class="archive-article-date">
-  	<time datetime="2021-05-26T08:08:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Linux-初步认识"><a href="#Linux-初步认识" class="headerlink" title="Linux 初步认识"></a>Linux 初步认识</h1><h2 id="Linux的千奇百怪的版本"><a href="#Linux的千奇百怪的版本" class="headerlink" title="Linux的千奇百怪的版本"></a>Linux的千奇百怪的版本</h2><p>目前世界上主流的操作系统 –&gt; Windows Linux Unix MacOS</p>
-<p><strong>Linux 严格上来说只是操作系统内核</strong>，我们所说的Linux操作系统实质上是 “GNU/Linux”</p>
-<p> <strong>“GNU/Linux”</strong> –&gt; GNU项目 + Linux kernel就可以组成一个类Unix的操作系统</p>
-<p>Linux主要运行在服务器和其他大型平台上</p>
-<p><strong>Linux发行版</strong> –&gt; 在Linux kernel 加上一些件组成,不同的组合就构成了不同的发行版 如 Debian Fedora OpenSUSE </p>
-        
-          <a class="article-more-a" href="/2021/05/26/%E6%AD%A5%E5%85%A5Linux%E7%9A%84%E4%B8%96%E7%95%8C/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/26/%E6%AD%A5%E5%85%A5Linux%E7%9A%84%E4%B8%96%E7%95%8C/">展开全文 >></a>
         </p>
       
 
