@@ -8,16 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>JVM垃圾回收机制 | 鑫宇的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对象被判定为垃圾的标准对于java对象来讲，当没有被任何对象所引用时，该对象就是没用的。对于系统而言它就是垃圾，其占据的内存就要被释放，同时该对象也要被销毁。 判断对象是否为垃圾的算法  引用计数算法 可达性分析算法  引用计数算法 通过判断对象的引用数量来判断对象是否可以被回收； 每个对象实例都是一个引用计数器，被引用则 + 1，完成引用则 - 1； 任何引用计数为0的对象实例可以被当作垃圾收集">
+  <meta name="description" content="对象被判定为垃圾的标准对于java对象来讲，当没有被任何对象所引用时，该对象就是没用的。对于系统而言它就是垃圾，其占据的内存就要被释放，同时该对象也要被销毁。 判断对象是否为垃圾的算法  引用计数算法 可达性分析算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM垃圾回收机制">
 <meta property="og:url" content="http://yoursite.com/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="鑫宇的个人博客">
-<meta property="og:description" content="对象被判定为垃圾的标准对于java对象来讲，当没有被任何对象所引用时，该对象就是没用的。对于系统而言它就是垃圾，其占据的内存就要被释放，同时该对象也要被销毁。 判断对象是否为垃圾的算法  引用计数算法 可达性分析算法  引用计数算法 通过判断对象的引用数量来判断对象是否可以被回收； 每个对象实例都是一个引用计数器，被引用则 + 1，完成引用则 - 1； 任何引用计数为0的对象实例可以被当作垃圾收集">
+<meta property="og:description" content="对象被判定为垃圾的标准对于java对象来讲，当没有被任何对象所引用时，该对象就是没用的。对于系统而言它就是垃圾，其占据的内存就要被释放，同时该对象也要被销毁。 判断对象是否为垃圾的算法  引用计数算法 可达性分析算法">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210805200054715.png">
+<meta property="og:image" content="http://yoursite.com/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210806084405663.png">
+<meta property="og:image" content="http://yoursite.com/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210806091340603.png">
+<meta property="og:image" content="http://yoursite.com/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210806101737937.png">
+<meta property="og:image" content="http://yoursite.com/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1.png">
 <meta property="article:published_time" content="2021-08-04T02:03:05.000Z">
-<meta property="article:modified_time" content="2021-08-05T13:39:29.009Z">
+<meta property="article:modified_time" content="2021-08-06T03:31:14.975Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -173,6 +177,8 @@
 <li>引用计数算法</li>
 <li>可达性分析算法</li>
 </ul>
+<a id="more"></a> 
+
 <h4 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h4><ul>
 <li>通过判断对象的引用数量来判断对象是否可以被回收；</li>
 <li>每个对象实例都是一个引用计数器，被引用则 + 1，完成引用则 - 1；</li>
@@ -184,15 +190,64 @@
 <p>主流的java垃圾回收机制用的是可达性分析算法来对垃圾进行标记。可达性分析算法是通过判断对象的引用链是否可达来决定对象是否可以被回收的。可达性算法是从离散数学的图论引入的，程序把所有的引用关系看成一张图，通过一系列的名为 GC Root 的对象作为起始点，从这些起始点向下搜索，搜索所走过的路径被称做引用链。当一个对象从GC Root 开始没有与任何引用链相连，那么从图论上来说，即从GC Root 到该对象是不可达的，此时证明该对象是不可用的，它也就会被标记为垃圾。</p>
 <img src="/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210805200054715.png" alt="image-20210805200054715" style="zoom: 80%;">
 
-<p>如上图所示，垃圾回收器会对内存中的整个对象进行遍历，从GC 根 ，即GC Root 开始，到根对象引用的其他对象，回收器将访问到的所有对象标记为存活，存活的对象在图中被标记为蓝色，即 Object 1、Object 2、Object 3，均为可达对象。在所有标记阶段被完成之后，所有存活对象已被标记完毕，其他那些比如图中灰色部分 Object 4、Object 5 就是GC 根对象不可达的对象，也就意味着应用不会在用到他们，回收器将会在回收阶段清除它们。</p>
+<p>如上图所示，垃圾回收器会对内存中的整个对象进行遍历，从GC 根 ，即GC Root 开始，到根对象引用的其他对象，回收器将访问到的所有对象标记为存活，存活的对象在图中被标记为蓝色，即 Object 1、Object 2、Object 3，均为可达对象。在所有标记阶段被完成之后，所有存活对象已被标记完毕，其他那些比如图中灰色部分 Object 4、Object 5 就是GC 根对象不可达的对象，也就意味着应用不会在用到他们，回收器将会在回收阶段清除它们。 </p>
 <p><strong>可以作为 GC Root 的对象</strong></p>
 <ul>
-<li>虚拟机栈中引用的对象 ： 比如java方法中new 了一个 Object 并赋值给一个局部变量</li>
-<li>方法区中的常量引用的对象</li>
-<li>方法区中的类静态属性引用的对象</li>
+<li>虚拟机栈中引用的对象 ： 比如java方法中new 了一个 Object 并赋值给一个局部变量，那么在该局部变量没有被销毁之前，new出来的Object 就会成为 GC Root。</li>
+<li>方法区中的常量引用的对象 : 在类中定义了一个常量，而该常量保存的是某个对象的地址，那么被保存的对象也称为GC 的根对象，当别的对象引用到它的时候就会形成关系链。</li>
+<li>方法区中的类静态属性引用的对象 </li>
 <li>本地方法栈中 JNI(Native方法) 的引用对象</li>
-<li>活跃线程的引用对象</li>
+<li>活跃线程的引用对象 ：java一切皆对象，因此活跃的线程也会成为 GC Root，只要线程还处于活跃状态，那么它引用的对象也被称为可达的。</li>
 </ul>
+<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><ul>
+<li>标记-清除算法</li>
+<li>复制算法</li>
+<li>标记-整理算法</li>
+<li>分代收集算法</li>
+</ul>
+<h3 id="标记-清除算法-Mark-and-Sweep"><a href="#标记-清除算法-Mark-and-Sweep" class="headerlink" title="标记-清除算法(Mark and Sweep)"></a>标记-清除算法(Mark and Sweep)</h3><ul>
+<li>标记：从根集合进行扫描，对存活的对象进行标记</li>
+<li>清除：对堆内存从头到尾进行线性遍历，回收不可达对象内存</li>
+</ul>
+<img src="/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210806084405663.png" alt="image-20210806084405663" style="zoom:80%;">
+
+<p>该算法将回收分为标记和清除两个阶段，先从根节点进行扫描，对已经存活的对象进行标记，用的是可达性分析算法，标记完成后会对堆内存从头到尾进行线性遍历，如果发现某对象没有被标记为可达对象，就会将次对象占用的内存回收。并且将原来已标记为可达对象的标识给清除掉，以便进行下一次垃圾回收。 </p>
+<p><strong>空间问题 - 碎片化</strong></p>
+<p>由于该算法不需要进行对象的移动，并且仅对不存活的对象进行处理，因此标记清除之后，会产生大量不连续的内存碎片。内存碎片太多会导致以后程序运行过程中需要分配较大的对象时，无法找到足够的连续内存，而不得不提前触发另一次垃圾收集动作。</p>
+<h3 id="复制算法-Copying"><a href="#复制算法-Copying" class="headerlink" title="复制算法(Copying)"></a>复制算法(Copying)</h3><ul>
+<li>分为对象面和空闲面</li>
+<li>对象在对象面上创建</li>
+<li>存活的对象被从对象面复制到空闲面</li>
+<li>将对象面所有对象内存清除</li>
+</ul>
+<img src="/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210806091340603.png" alt="image-20210806091340603">
+
+<p>复制算法将可用内存按容量、比例划分为两个或者多个块，并选择其中的一块或者两块作为对象面，其他的则作为空闲面。对象主要是在对象面上创建的，当被定义的对象面块的内存快用完时，就将还活着的对象复制到其中一块空闲面上，再将已使用的内存空间一次清理掉。</p>
+<p><strong>这种算法解决了碎片化的问题、顺序分配内存，简单高效、适用于对象存活率低的场景</strong>，比如年轻代，这样使得每次都对整个半区进行内存回收，内存分配时也就不用考虑内存碎片等复杂情况，推倒重建只需要移动堆顶指针按顺序分配内存即可。</p>
+<p>事实上现在商用的虚拟机都采用这种算法来回收年轻代，因为年轻代中的对象每次回收都基本上有10%左右的对象存活，所以需要复制的对象很少。</p>
+<h3 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h3><ul>
+<li>标记：从根集合中进行扫描，对存活的对象进行标记</li>
+<li>清除：移动所有存活的对象，且按照内存地址次序依次排列，然后将末端内存地址以后的内存全部回收。</li>
+</ul>
+<p><img src="/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210806101737937.png" alt="image-20210806101737937"></p>
+<p>复制回收算法在应对对象存活率较高的情况就不好用了，要进行较多的复制操作，效率就会变低，更关键的是，如果不想浪费50%的空间就需要有额外的空间进行分配担保以应对被使用的内存中所有对象都100%存活的极端情况，所以在老年代中一般并不会适用复制算法，而是采用标记整理算法。</p>
+<p> 标记-整理算法它采用同标记-清除算法相同的方式对对象进行标记，但在清除阶段不同，<strong>标记-整理算法是在标记清除算法的基础上又进行了对象的移动</strong>，因此成本更高，但也解决了内存碎片的问题。</p>
+<h3 id="分代收集算法-Generation-Collector"><a href="#分代收集算法-Generation-Collector" class="headerlink" title="分代收集算法(Generation Collector)"></a>分代收集算法(Generation Collector)</h3><ul>
+<li>垃圾回收算法的组合拳</li>
+<li>按照对象生命周期的不同划分区域以采取不同的垃圾回收算法</li>
+<li>提高JVM 的回收效率</li>
+</ul>
+<p>分代收集算法可以理解为组合拳，将堆内存进一步划分，不同的对象的生命周期和存活情况也不一样，将不同生命周期的对象分配到堆中不同的区域并对堆内存的不同区域采用不同的回收策略进行回收是可以提高JVM回收效率。</p>
+<h4 id="java堆结构"><a href="#java堆结构" class="headerlink" title="java堆结构"></a>java堆结构</h4><p>Java 堆是垃圾收集器管理的主要区域，因此也被称作<strong>GC 堆（Garbage Collected Heap）</strong>由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：年轻代和老年代，再细致一点有：Eden 空间、From Survivor、To Survivor 空间等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
+<p>我们知道jdk7及jdk7以前java的堆内存一般可以分为 Young Generation 年轻代、Old Generation 老年代、以及Permanent Generation 永久代，而 jdk8及以后 永久代就被去掉了，仅保留年轻代和老年代。</p>
+<p>从垃圾回收的角度，<strong>年轻代的对象存活率低就会采用复制算法，而老年代的存活率高就采用标记-清除算法或者标记整理算法</strong>。</p>
+<img src="/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1.png" alt="1" style="zoom: 67%;">
+
+<h4 id="GC-的分类"><a href="#GC-的分类" class="headerlink" title="GC 的分类"></a>GC 的分类</h4><ul>
+<li>Minor GC</li>
+<li>Full GC</li>
+</ul>
+<p>分代收集的算法主要分为两种，分别了 Minor GC 和 Full GC , Minor GC 是发生在年轻代中的复制算法，年轻代几乎是所有java 对象出生的地方，即 java对象申请的内存以及存放都是在这里发生的。java 中的大部分对象通常不需要长久的存活，有朝生夕灭的性质。当一个对象被判定为死亡时，GC 就有责任来回收掉这部分对象的内存空间。新生代是GC 收集垃圾的频繁区域。第二种GC 方式与老年代相关，由于对老年代的回收一般会伴随年轻代的垃圾收集，因此第二种方式被命名为Full GC。</p>
 
       
 
@@ -305,7 +360,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象被判定为垃圾的标准"><span class="toc-number">1.</span> <span class="toc-text">对象被判定为垃圾的标准</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引用计数算法"><span class="toc-number">1.0.1.</span> <span class="toc-text">引用计数算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可达性分析算法"><span class="toc-number">1.0.2.</span> <span class="toc-text">可达性分析算法</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象被判定为垃圾的标准"><span class="toc-number">1.</span> <span class="toc-text">对象被判定为垃圾的标准</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引用计数算法"><span class="toc-number">1.0.1.</span> <span class="toc-text">引用计数算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可达性分析算法"><span class="toc-number">1.0.2.</span> <span class="toc-text">可达性分析算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾收集算法"><span class="toc-number">2.</span> <span class="toc-text">垃圾收集算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#标记-清除算法-Mark-and-Sweep"><span class="toc-number">2.1.</span> <span class="toc-text">标记-清除算法(Mark and Sweep)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制算法-Copying"><span class="toc-number">2.2.</span> <span class="toc-text">复制算法(Copying)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标记-整理算法"><span class="toc-number">2.3.</span> <span class="toc-text">标记-整理算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分代收集算法-Generation-Collector"><span class="toc-number">2.4.</span> <span class="toc-text">分代收集算法(Generation Collector)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#java堆结构"><span class="toc-number">2.4.1.</span> <span class="toc-text">java堆结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GC-的分类"><span class="toc-number">2.4.2.</span> <span class="toc-text">GC 的分类</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
