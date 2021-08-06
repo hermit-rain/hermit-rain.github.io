@@ -20,8 +20,9 @@
 <meta property="og:image" content="http://yoursite.com/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210806091340603.png">
 <meta property="og:image" content="http://yoursite.com/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210806101737937.png">
 <meta property="og:image" content="http://yoursite.com/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1.png">
+<meta property="og:image" content="http://yoursite.com/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210806151741410.png">
 <meta property="article:published_time" content="2021-08-04T02:03:05.000Z">
-<meta property="article:modified_time" content="2021-08-06T03:31:14.975Z">
+<meta property="article:modified_time" content="2021-08-06T08:00:06.687Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -239,15 +240,34 @@
 </ul>
 <p>分代收集算法可以理解为组合拳，将堆内存进一步划分，不同的对象的生命周期和存活情况也不一样，将不同生命周期的对象分配到堆中不同的区域并对堆内存的不同区域采用不同的回收策略进行回收是可以提高JVM回收效率。</p>
 <h4 id="java堆结构"><a href="#java堆结构" class="headerlink" title="java堆结构"></a>java堆结构</h4><p>Java 堆是垃圾收集器管理的主要区域，因此也被称作<strong>GC 堆（Garbage Collected Heap）</strong>由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：年轻代和老年代，再细致一点有：Eden 空间、From Survivor、To Survivor 空间等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
-<p>我们知道jdk7及jdk7以前java的堆内存一般可以分为 Young Generation 年轻代、Old Generation 老年代、以及Permanent Generation 永久代，而 jdk8及以后 永久代就被去掉了，仅保留年轻代和老年代。</p>
+<p>我们知道jdk7及jdk7以前java的堆内存一般可以分为 Young Generation 年轻代、Old Generation 老年代、以及Permanent Generation 永久代，而 jdk8及以后 永久代就被去掉了，仅保留年轻代和老年代。下图所示的 Eden 区、From Survivor0(“From”) 区、To Survivor1(“To”) 区都属于新生代，Old Memory 区属于老年代。</p>
 <p>从垃圾回收的角度，<strong>年轻代的对象存活率低就会采用复制算法，而老年代的存活率高就采用标记-清除算法或者标记整理算法</strong>。</p>
 <img src="/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1.png" alt="1" style="zoom: 67%;">
 
+<p><strong>常用的调优参数</strong></p>
+<ul>
+<li><code>-XX:SurvivorRatio</code> : Eden 和 Survivor 的比值，默认为 8 ：1</li>
+<li><code>-XX:NewRatio</code>: 老年代和年轻代内存大小的比值</li>
+<li><code>-XX:MaxTenuringThreshold</code> : 对象从年轻代晋升到老年代经过 GC 次数的最大阈值</li>
+</ul>
 <h4 id="GC-的分类"><a href="#GC-的分类" class="headerlink" title="GC 的分类"></a>GC 的分类</h4><ul>
 <li>Minor GC</li>
 <li>Full GC</li>
 </ul>
-<p>分代收集的算法主要分为两种，分别了 Minor GC 和 Full GC , Minor GC 是发生在年轻代中的复制算法，年轻代几乎是所有java 对象出生的地方，即 java对象申请的内存以及存放都是在这里发生的。java 中的大部分对象通常不需要长久的存活，有朝生夕灭的性质。当一个对象被判定为死亡时，GC 就有责任来回收掉这部分对象的内存空间。新生代是GC 收集垃圾的频繁区域。第二种GC 方式与老年代相关，由于对老年代的回收一般会伴随年轻代的垃圾收集，因此第二种方式被命名为Full GC。</p>
+<p>分代收集的算法主要分为两种，分别了 Minor GC 和 Full GC , Minor GC 是发生在年轻代中的复制算法，年轻代几乎是所有java 对象出生的地方，即 java对象申请的内存以及存放都是在这里发生的。java 中的大部分对象通常不需要长久的存活，具有朝生夕灭的性质。当一个对象被判定为死亡时，GC 就有责任来回收掉这部分对象的内存空间。新生代是GC 收集垃圾的频繁区域。第二种GC 方式与老年代相关，由于对老年代的回收一般会伴随年轻代的垃圾收集，因此第二种方式被命名为Full GC。</p>
+<h5 id="Minor-GC"><a href="#Minor-GC" class="headerlink" title="Minor GC"></a>Minor GC</h5><p>大部分情况，对象都会首先在 Eden 区域分配，<strong>若Eden区放不下新创建的对象也可能被放到Survivor区或者老年代中去</strong>。两个Survivor 区分别被定义为 “From”区和 “To”区，并且并没有明确规定，会随着垃圾回收的进行而相互转换。</p>
+<p>在一次新生代垃圾回收后，如果对象还存活，则会进入 s0 或者 s1，并且对象的年龄还会加 1(Eden 区-&gt;Survivor 区后对象的初始年龄变为1)，<strong>当它的年龄增加到一定程度（默认为大于 15 岁），就会被晋升到老年代中</strong>。</p>
+<h5 id="Full-GC"><a href="#Full-GC" class="headerlink" title="Full GC"></a>Full GC</h5><p>在年轻代中的对象经过一定次数的回收后依然存活并且年龄超过了晋升阈值时，将会进入老年代，因此可以认为老年代中存放的都是生命周期较长的对象。老年代的内存要比新生代的内存要大，大概的比例为2：1。</p>
+<p>大批对象死去少量对象存活的新生代，使用的是复制算法，复制成本较低；而对象存活率较高，没有额外空间进行分配担保的老年代则采用标记-清理算法或者标记-整理算法进行回收。</p>
+<p><img src="/2021/08/04/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20210806151741410.png" alt="image-20210806151741410"></p>
+<p>当触发老年代的垃圾回收时通常也会伴随着对新生代堆内存的回收，即对整个堆进行垃圾回收，这便是所谓的Full GC, Major GC 通常与 Full GC 是等价的(Major GC 要分清除是年轻代的GC 还是老年代中的GC)，即收集整个GC 堆。Full GC 的速度通常比 Minor GC 慢得多，一般会慢10倍以上，不过一般情况下，老年代中的对象大多数是在Survivor中熬过来的，他们是不会那么容易死掉的，因此Full GC发生的次数不会比 Major GC那么频繁。</p>
+<p><strong>触发Full GC 的条件</strong></p>
+<p>1、老年代空间不足：如果创建一个大对象，Eden 区域放不下这个对象，就会直接保存在老年代中，如果老年代空间也不足就会触发Full GC,为了避免这种情况最好就是不要创建太大的对象。</p>
+<p>2、永久代空间不足：仅仅针对jdk7及以前版本，当系统中需要加载的类调用的方法很多，同时永久代中没有足够的空间去存放我们需要的类的信息和方法的信息就会触发 Full GC, 而jdk8以后取消了永久代所以该条件不成立。这也是为什么用元空间替代永久代的原因，为的是降低 Full GC 的频率，减少GC的负担，提升其效率。</p>
+<p>3、CMS GC 时出现 promotion failed, concurrent mode failure ： 对于采用 CMS 进行老年代的程序而言尤其要注意 GC 日志中是否有promotion failed, concurrent mode failure 这两种情况，当这两种日志出现的时候可能会触发 Full GC </p>
+<p>4、Minor GC 晋升到老年代的平均大小大于老年代的剩余空间：<code>HotSpot</code> 为了避免由于新生代对象晋升到老年代导致老年代空间不足的现象，在进行Minor GC 时做了一个判断，如果之前统计所得到了Minor GC晋升到老年代的平均大小大于老年代的剩余空间，那么就直接触发Full GC.</p>
+<p>5、调用 <code>System.gc()</code> : 在程序中直接调用 <code>System.gc()</code>会显示触发 Full GC  ,同时对老年代和年轻代进行回收，这个方法只是提醒虚拟机，码农需要你回收一下，但是虚拟机执不执行由虚拟机自己决定，码农没有绝对的控制权。</p>
+<p>6、使用RMI来进行 RPC 或管理的JDK 应用，每小时执行1次Full GC</p>
 
       
 
@@ -360,7 +380,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象被判定为垃圾的标准"><span class="toc-number">1.</span> <span class="toc-text">对象被判定为垃圾的标准</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引用计数算法"><span class="toc-number">1.0.1.</span> <span class="toc-text">引用计数算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可达性分析算法"><span class="toc-number">1.0.2.</span> <span class="toc-text">可达性分析算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾收集算法"><span class="toc-number">2.</span> <span class="toc-text">垃圾收集算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#标记-清除算法-Mark-and-Sweep"><span class="toc-number">2.1.</span> <span class="toc-text">标记-清除算法(Mark and Sweep)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制算法-Copying"><span class="toc-number">2.2.</span> <span class="toc-text">复制算法(Copying)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标记-整理算法"><span class="toc-number">2.3.</span> <span class="toc-text">标记-整理算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分代收集算法-Generation-Collector"><span class="toc-number">2.4.</span> <span class="toc-text">分代收集算法(Generation Collector)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#java堆结构"><span class="toc-number">2.4.1.</span> <span class="toc-text">java堆结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GC-的分类"><span class="toc-number">2.4.2.</span> <span class="toc-text">GC 的分类</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象被判定为垃圾的标准"><span class="toc-number">1.</span> <span class="toc-text">对象被判定为垃圾的标准</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引用计数算法"><span class="toc-number">1.0.1.</span> <span class="toc-text">引用计数算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可达性分析算法"><span class="toc-number">1.0.2.</span> <span class="toc-text">可达性分析算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾收集算法"><span class="toc-number">2.</span> <span class="toc-text">垃圾收集算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#标记-清除算法-Mark-and-Sweep"><span class="toc-number">2.1.</span> <span class="toc-text">标记-清除算法(Mark and Sweep)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制算法-Copying"><span class="toc-number">2.2.</span> <span class="toc-text">复制算法(Copying)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标记-整理算法"><span class="toc-number">2.3.</span> <span class="toc-text">标记-整理算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分代收集算法-Generation-Collector"><span class="toc-number">2.4.</span> <span class="toc-text">分代收集算法(Generation Collector)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#java堆结构"><span class="toc-number">2.4.1.</span> <span class="toc-text">java堆结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GC-的分类"><span class="toc-number">2.4.2.</span> <span class="toc-text">GC 的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Minor-GC"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">Minor GC</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Full-GC"><span class="toc-number">2.4.2.2.</span> <span class="toc-text">Full GC</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
