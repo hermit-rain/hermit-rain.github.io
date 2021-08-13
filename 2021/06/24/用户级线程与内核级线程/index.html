@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/5.png">
 <meta property="og:image" content="http://yoursite.com/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/6.png">
 <meta property="article:published_time" content="2021-06-24T12:04:40.000Z">
-<meta property="article:modified_time" content="2021-07-02T01:54:19.176Z">
+<meta property="article:modified_time" content="2021-08-09T03:18:56.916Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TreadCreate</span><span class="params">(A)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TCB *tcb = <span class="built_in">malloc</span>();</span><br><span class="line">	*<span class="built_in">stack</span> = <span class="built_in">malloc</span>();</span><br><span class="line">	*<span class="built_in">stack</span> = A; <span class="comment">//初始化栈顶即为A()函数100位置处</span></span><br><span class="line">	tcb.esp = <span class="built_in">stack</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p> 至此我们便可以通过 <code>ThreadCreate</code> 与 <code>Yield</code> 两个函数的配合实现用户级线程的切换了！</p>
-<h3 id="用户级线程的缺点"><a href="#用户级线程的缺点" class="headerlink" title="用户级线程的缺点"></a>用户级线程的缺点</h3><p>用户级线程是在用户态中切来切去，一般并不需要进入到内核，操作系统就感知不到其存在。当需要管理硬件的时候就要进入到内核，一旦遇到IO后操作系统CPU就会切换，因为操作系统感知不到用户级线程的存在也就不会将CPU执行权重新交回到当前进程去执行，而是去执行其他的进程，那么当前进程就要等待，对于一些时事性比较强的应用，用户体验会很差。这也是<code>Chrom</code>浏览器打开新标签采用多进程的原因</p>
+<h3 id="用户级线程的缺点"><a href="#用户级线程的缺点" class="headerlink" title="用户级线程的缺点"></a>用户级线程的缺点</h3><p>用户级线程是在用户态中切来切去，一般并不需要进入到内核，操作系统就感知不到其存在。当需要管理硬件的时候就要进入到内核，一旦遇到IO后操作系统CPU就会切换，因为操作系统感知不到用户级线程的存在也就不会将CPU执行权重新交回到当前进程去执行，而是去执行其他的进程，那么当前进程就要等待，对于一些实时性比较强的应用，用户体验会很差。这也是<code>Chrom</code>浏览器打开新标签采用多进程的原因</p>
  <img src="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/1.png" alt="1" style="zoom: 50%;">
 
 <h1 id="核心级线程"><a href="#核心级线程" class="headerlink" title="核心级线程"></a>核心级线程</h1><h2 id="多处理器和多核的区别"><a href="#多处理器和多核的区别" class="headerlink" title="多处理器和多核的区别"></a>多处理器和多核的区别</h2><img src="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/2.png" alt="2">
