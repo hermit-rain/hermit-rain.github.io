@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/07/07/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/image-20210814135759102.png">
 <meta property="og:image" content="http://yoursite.com/2021/07/07/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/image-20210814142943314.png">
 <meta property="article:published_time" content="2021-07-07T02:36:22.000Z">
-<meta property="article:modified_time" content="2021-08-14T06:46:23.240Z">
+<meta property="article:modified_time" content="2021-08-15T03:25:37.841Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -278,13 +278,17 @@
 <p>cin()表示关中断，sti()开中断。当一个进程Pi进入临界区之前关闭中断，这样CPU就不会调度，其他的进程也就无法再访问该临界区啦，执行完毕再打开中断。</p>
 <p>CPU中断的原理：CPU旁边有个INTR寄存器，如果有中断来，就将INTR的某一位置为1，CPU每执行完一条指令之后就看一下是不是有中断来，如果有就执行；cin()函数的作用就是让CPU不看INTR寄存器，这样不管有没有中断来，CPU都不管。</p>
 <p>但是这种方式对于多核不好使，因为你只能控制一个CPU，其他的CPU控制不了，而现在的计算机基本上都是多核了。这种方式只适用于单核的小系统。</p>
-<h4 id="硬件原子指令法"><a href="#硬件原子指令法" class="headerlink" title="硬件原子指令法"></a>硬件原子指令法</h4><p>我们说保护信号量就好像给其上锁，锁是现实时间中直观的东西，但是在计算机中锁就是变量，该信号量上锁就好比给 empty 变量 通过 mutex 变量来保护，每个进程进来的时候，通过判断mutex 变量的值来决定是否有资源，是否可以进入。但是关键的是 mutex 的我们又无法进行保护，难道是用mutex 来保护 empty ，再找个变量来保护 mutex ，那保护mutex 的变量又用谁来保护？？</p>
-<p>我们先前的所有分析方法都是通过软件的方式来保护信号量，那我们能不能通过硬件，让硬件帮我们做好这个 mutex 。通过硬件的原子指令保证修改mutex 只需要一条指令，那执行的中间就不会被打断了，那么不会完美了嘛！</p>
+<h4 id="硬件原子指令法"><a href="#硬件原子指令法" class="headerlink" title="硬件原子指令法"></a>硬件原子指令法</h4><p>我们说保护信号量就好像给其上锁，锁是现实时间中直观的东西，但是在计算机中锁就是变量，该信号量上锁就好比给 empty 变量 通过 mutex 变量来保护，每个进程进来的时候，通过判断mutex 变量的值来决定是否有资源，是否可以进入。但是关键的是 mutex 又无法进行保护，难道是用mutex 来保护 empty ，再找个变量来保护 mutex ，那保护mutex 的变量又用谁来保护？？</p>
+<p>我们先前的所有分析方法都是通过软件的方式来保护信号量，那我们能不能通过硬件，让硬件帮我们做好这个 mutex 。通过硬件的原子指令保证修改mutex 只需要一条指令，那执行的中间就不会被打断了，那么不就完美了嘛！</p>
 <img src="/2021/07/07/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/image-20210814142943314.png" alt="image-20210814142943314" style="zoom:67%;">
 
-<p>关键就是上面代码中–&gt; <code>while (TestAndSet(&amp;lock))</code> 这条指令完整的执行，当有进程进来了就一次执行(瞬间执行完毕)判断是否”加了锁”，如果判断有进程在临界区就开始空转，直到其退出临界区。 </p>
+<p>关键就是上面代码中–&gt; <code>while (TestAndSet(&amp;lock))</code> 这条指令能够完整的执行，当有进程进来了就一次执行(瞬间执行完毕)判断是否”加了锁”，如果判断有进程在临界区就开始空转，直到其退出临界区。 </p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>多进程之间的通信需要信号量，同时需要用临界区来保护信号量，临界区可以用面包店、开关中断以及原子指令(根据合适的场景选择)。一旦用临界区保护住了信号量，信号量在执行过程中的语义就一定会正确，语义正确之后，根据这个语义就可以准确的实现进程间的同步。</p>
 <p><strong>用临界区去保护信号量，用信号量实现同步！</strong></p>
+<p><strong>参考资料</strong></p>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1d4411v7u7?p=16" target="_blank" rel="noopener">哈工大李治军-操作系统</a></li>
+</ul>
 
       
 
@@ -368,11 +372,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/07/15/Java%E9%9B%86%E5%90%88/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/07/10/%E6%AD%BB%E9%94%81/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Java集合
+          死锁
         
       </div>
     </a>
