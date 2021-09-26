@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-09-26T13:24:49.058Z</updated>
+  <updated>2021-09-26T13:26:56.400Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>协程、进程、线程</title>
-    <link href="http://yoursite.com/2021/09/26/%E5%8D%8F%E7%A8%8B%20%E8%BF%9B%E7%A8%8B%20%E7%BA%BF%E7%A8%8B/"/>
-    <id>http://yoursite.com/2021/09/26/%E5%8D%8F%E7%A8%8B%20%E8%BF%9B%E7%A8%8B%20%E7%BA%BF%E7%A8%8B/</id>
+    <title>进程间通信</title>
+    <link href="http://yoursite.com/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/"/>
+    <id>http://yoursite.com/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</id>
     <published>2021-09-26T13:22:29.000Z</published>
-    <updated>2021-09-26T13:24:49.058Z</updated>
+    <updated>2021-09-26T13:26:56.400Z</updated>
     
     
     
