@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>进程间通信 | 鑫宇的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、进程与线程1、程序、进程、线程程序：通过某种语言编写的一组指令 ，即一段静态的代码。 进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了动态性。系统运行一个程序即是一个进程从创建，运行到消亡的过程。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到当前运行的进程。   线程概念的出现 进程的出现使操作系统的并发成为了可能，但是随着计算机的">
+  <meta name="description" content="一、进程与线程1、程序、进程、线程程序：通过某种语言编写的一组指令 ，即一段静态的代码。 进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了动态性。系统运行一个程序即是一个进程从创建，运行到消亡的过程。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到当前运行的进程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程间通信">
 <meta property="og:url" content="http://yoursite.com/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/index.html">
 <meta property="og:site_name" content="鑫宇的个人博客">
-<meta property="og:description" content="一、进程与线程1、程序、进程、线程程序：通过某种语言编写的一组指令 ，即一段静态的代码。 进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了动态性。系统运行一个程序即是一个进程从创建，运行到消亡的过程。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到当前运行的进程。   线程概念的出现 进程的出现使操作系统的并发成为了可能，但是随着计算机的">
+<meta property="og:description" content="一、进程与线程1、程序、进程、线程程序：通过某种语言编写的一组指令 ，即一段静态的代码。 进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了动态性。系统运行一个程序即是一个进程从创建，运行到消亡的过程。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到当前运行的进程。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/1.png">
 <meta property="og:image" content="http://yoursite.com/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/5.png">
 <meta property="article:published_time" content="2021-09-26T13:22:29.000Z">
-<meta property="article:modified_time" content="2021-09-27T08:15:48.539Z">
+<meta property="article:modified_time" content="2021-09-27T08:19:05.657Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -170,6 +170,8 @@
       
         <h1 id="一、进程与线程"><a href="#一、进程与线程" class="headerlink" title="一、进程与线程"></a>一、进程与线程</h1><h2 id="1、程序、进程、线程"><a href="#1、程序、进程、线程" class="headerlink" title="1、程序、进程、线程"></a>1、程序、进程、线程</h2><p>程序：通过某种语言编写的一组指令 ，即一段<strong>静态的代码</strong>。</p>
 <p>进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了<strong>动态性</strong>。<strong>系统运行一个程序即是一个进程从创建，运行到消亡的过程</strong>。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到当前运行的进程。</p>
+<a id="more"></a>  
+
 <img src="/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/1.png" alt="1" style="zoom: 67%;">
 
 <p><strong>线程概念的出现</strong></p>
@@ -273,6 +275,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/10/01/sql%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          sql常用语法
+        
+      </div>
+    </a>
   
   
     <a href="/2021/08/20/java%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/" id="article-nav-older" class="article-nav-link-wrap">

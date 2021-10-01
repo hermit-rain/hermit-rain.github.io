@@ -132,6 +132,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-sql常用语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/01/sql%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/">sql常用语法</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+        
+        <a href="/2021/10/01/sql%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2021-10-01T08:12:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="数据库的基本操作"><a href="#数据库的基本操作" class="headerlink" title="数据库的基本操作"></a>数据库的基本操作</h2><p>显示数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span>;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2021/10/01/sql%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/01/sql%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-进程间通信" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -156,28 +235,9 @@
       
         <h1 id="一、进程与线程"><a href="#一、进程与线程" class="headerlink" title="一、进程与线程"></a>一、进程与线程</h1><h2 id="1、程序、进程、线程"><a href="#1、程序、进程、线程" class="headerlink" title="1、程序、进程、线程"></a>1、程序、进程、线程</h2><p>程序：通过某种语言编写的一组指令 ，即一段<strong>静态的代码</strong>。</p>
 <p>进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了<strong>动态性</strong>。<strong>系统运行一个程序即是一个进程从创建，运行到消亡的过程</strong>。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到当前运行的进程。</p>
-<img src="/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/1.png" alt="1" style="zoom: 67%;">
-
-<p><strong>线程概念的出现</strong></p>
-<p>进程的出现使操作系统的并发成为了可能，但是随着计算机的普及，人们对<strong>实时性</strong>有了更高的要求。一个进程在一段时间只能做一件事情，如果一个进程有多个任务，只能逐一的去执行这些子任务。然而这些子任务之间并不存在顺序上的依赖，因此人们想到既然CPU可以按照时间片的方式轮流的切换执行不同的进程，那为什么不能也同样给进程子任务打上标签，让CPU按照更细的时间片来执行子任务呢？由于子任务共享内存等资源，因此隶属于同一个进程的子任务之间的切换是不需要切换页目录以使用新的地址空间的，这就为子任务的快速切换提供了可能。此时人们便提出了线程，让一个线程去执行子任务，这样一个进程就包括了多个线程，每个线程去负责独立的子任务，这样让进程的内部并发成为了可能，就实现了实时性的目的。</p>
-<p>线程：<strong>进程进一步细化为线程，是一个程序内部的一条执行路径</strong>。也叫做轻量级进程。</p>
-<p>如下图所示，在<code>CCleaner</code> 这一应用程序中，我们同时执行<code>Health Check</code> 以及 <code>Custom Clean</code> 两项子任务即为多线程。</p>
-<img src="/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/5.png" alt="5" style="zoom:67%;">
-
-<h2 id="2、进程与线程的关系及区别"><a href="#2、进程与线程的关系及区别" class="headerlink" title="2、进程与线程的关系及区别"></a>2、进程与线程的关系及区别</h2><ul>
-<li><strong>进程是资源分配的最小单位，线程是CPU调度的最小单位</strong></li>
-<li>进程有独立的地址空间，相互不影响，多个线程只是进程的不同执行路径，共享其地址空间及资源</li>
-<li>线程不能看做独立的应用，而进程可看作独立应用</li>
-<li>多进程的程序比多线程的程序健壮</li>
-<li>进程的切换比线程的切换开销大</li>
-</ul>
-<p><strong>注解</strong></p>
-<p>进程是资源分配的基本单位，所有与该进程有关的资源都被记录在进程控制块PCB中，以表示该进程拥有或者正在使用这些资源。同时进程也是抢占处理机调度的单位，它拥有完整的虚拟内存和地址空间。当进程发生调度时，不同的进程拥有不同的虚拟地址空间，而同一进程中的不同线程共享同一地址空间。</p>
-<p>线程与资源分配无关，它属于某一进程，并和该进程内的其他线程共享进程的资源。线程只由相关的堆、栈 寄存器、程序计数器和线程控制表TCB组成，其中寄存器用来存储线程内的局部变量，但并不存储其他线程的相关变量。每一个独立的线程有一个程序的入口、顺序执行序列以及程序的出口，但是线程并不能独立的执行，必须依存于某个应用程序中，由应用程序提供对多个线程的执行控制。</p>
-<p>操作系统并没有将多个线程当作多个应用来实现进程的调度和管理以及资源的分配，而进程可作为独立的应用，拥有独立的内存空间。当一个进程崩溃后，在保护模式下并不会对其他进程产生影响，然而某个线程挂掉之后其所在的进程也会同样挂掉。</p>
-<p>进程切换比线程切换开销大、耗费资源、效率差，对于要求同时进行，并且要求共享某些变量的并发操作只能用线程，不能用进程。</p>
-<h2 id="3-协程"><a href="#3-协程" class="headerlink" title="3.协程"></a>3.协程</h2><p>//to - do</p>
-<h1 id="二、进程间通信"><a href="#二、进程间通信" class="headerlink" title="二、进程间通信"></a>二、进程间通信</h1>
+        
+          <a class="article-more-a" href="/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/#more">more >></a>
+        
       
 
       
@@ -837,85 +897,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数据库必知必会" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/">数据库必知必会</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/" class="archive-article-date">
-  	<time datetime="2021-06-18T02:42:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="数据库索引"><a href="#数据库索引" class="headerlink" title="数据库索引"></a>数据库索引</h1><h2 id="何为索引？为什么要使用索引？"><a href="#何为索引？为什么要使用索引？" class="headerlink" title="何为索引？为什么要使用索引？"></a>何为索引？为什么要使用索引？</h2><p><strong>索引是一种用于快速查询和检索数据的数据结构。常见的索引结构有: B 树， B+树和 Hash。</strong></p>
-<p>查询数据最基本的方式为全表扫描，即将整张表的数据全部或者分批次加载到内存中，<strong>磁盘存储的最小单位为块</strong>(512Byte)，由多行数据来组成。我们在查询数据时将块加载进内存，<strong>然后逐个块的去轮寻</strong>，找到目标数据即返回，这种查询方式是非常慢的，所以我们就需要引入一种更高效的查询机制即索引。<strong>索引的灵感来源于字典，类似于字典的目录</strong>。</p>
-        
-          <a class="article-more-a" href="/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/">展开全文 >></a>
         </p>
       
 
