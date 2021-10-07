@@ -132,6 +132,160 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-MySQL基础综合" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/07/MySQL%E5%9F%BA%E7%A1%80%E7%BB%BC%E5%90%88/">MySQL基础综合</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+        
+        <a href="/2021/10/07/MySQL%E5%9F%BA%E7%A1%80%E7%BB%BC%E5%90%88/" class="archive-article-date">
+  	<time datetime="2021-10-07T08:06:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="如何设计一个关系型数据库"><a href="#如何设计一个关系型数据库" class="headerlink" title="如何设计一个关系型数据库"></a>如何设计一个关系型数据库</h2><img src="/2021/10/07/MySQL%E5%9F%BA%E7%A1%80%E7%BB%BC%E5%90%88/1.png" alt="1" style="zoom:67%;">
+
+<p>要设计一个关系型数据库，首先要将其划分为两大部分，即<strong>存储</strong>部分和<strong>程序实例</strong>部分。存储部分就类似于OS文件系统，将数据最终持久化存入磁盘中，即存入机械硬盘或者SSD固态硬盘中。程序实例部分要对存储部分进行逻辑上的管理，而程序实例部分包括<strong>将数据的逻辑关系转换成物理存储关系的存储管理模块</strong>、<strong>优化执行效率的缓存模块</strong>、<strong>将SQL语句进行解析的SQL解析模块</strong>、<strong>记录操作的日志管理模块</strong>、<strong>进行多用户管理的权限划分模块</strong>、<strong>灾难恢复的容灾机制模块</strong>、<strong>优化数据查询的索引管理模块</strong>、<strong>以及使得数据库支持并发操作的锁管理模块</strong>。</p>
+<h2 id="数据库理论范式"><a href="#数据库理论范式" class="headerlink" title="数据库理论范式"></a>数据库理论范式</h2><table>
+<thead>
+<tr>
+<th align="center">范式</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1NF</td>
+<td align="center">每个属性值都是不可再分的最小数据单位,即不能表中有表</td>
+</tr>
+<tr>
+<td align="center">2NF</td>
+<td align="center">从1NF中消除非主属性对候选码的部分函数依赖</td>
+</tr>
+<tr>
+<td align="center">3NF</td>
+<td align="center">从2NF关系中,消除非主属性对码的传递函数依赖</td>
+</tr>
+<tr>
+<td align="center">BCNF</td>
+<td align="center">从3NF基础上，消除主属性对候选码的部分依赖与传递依赖</td>
+</tr>
+</tbody></table>
+<h2 id="MySQL注入"><a href="#MySQL注入" class="headerlink" title="MySQL注入"></a>MySQL注入</h2><p>SQL注入 —&gt;  通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。简单来说，SQL注入就是一种通过操作输入（可以是表单，可以是get请求，也可以是POST请求等）来插入或修改后台SQL语句达到代码执行从而进行攻击的技术。</p>
+<p><strong>SQL注入产生的原因</strong></p>
+<p>程序错误 -&gt; 程序员在编写代码的时候，没有对用户输入数据的合法性进行严格的判断和过滤，从而导致应用程序存在该漏洞。</p>
+<p><strong>SQL 注入的方式</strong></p>
+<ul>
+<li>手工注入</li>
+<li>工具注入</li>
+</ul>
+<p><strong>手工注入</strong>： 在mysql手工注入中主要是利用mysql自带的information_schema数据库，information_schema这个数据库保存了MySQL服务器所有数据库的信息。如数据库名，数据库的表，表栏的数据类型与访问权限等。</p>
+<p><strong>工具注入：</strong> 工具注入是可以节省很多时间，但是仅仅靠工具也不一定能利用该漏洞，因为工具有自己的局限性，不如手工那么灵活。常见的SQL注入工具有 sqlmap，BSQL、the mole…..</p>
+<h2 id="MySQL-主从复制"><a href="#MySQL-主从复制" class="headerlink" title="MySQL 主从复制"></a>MySQL 主从复制</h2><p><strong>基本概念</strong></p>
+<p>MySQL 主从复制是指数据可以从一个MySQL数据库服务器主节点复制到一个或多个从节点。MySQL 默认采用异步复制方式，这样从节点不用一直访问主服务器来更新自己的数据，数据的更新可以在远程连接上进行，从节点可以复制主数据库中的所有数据库或者特定的数据库，或者特定的表。</p>
+<p><strong>主从复制的用途</strong></p>
+<ol>
+<li><strong>读写分离 ：</strong> 在开发工作中，有时候会遇见某个sql 语句需要锁表，导致暂时不能使用读的服务，这样就会影响现有业务，使用主从复制，让主库负责写，从库负责读，这样，即使主库出现了锁表的情景，通过读从库也可以保证业务的正常运作。</li>
+<li><strong>数据的实时备份：</strong>  数据实时备份，当系统中某个节点发生故障时，可以方便的故障切换</li>
+</ol>
+<p><strong>主从复制的基本原则</strong></p>
+<ul>
+<li>每个slave只能有一个 master</li>
+<li>每个slave 只能有一个唯一的服务器 ID</li>
+<li>每个master 可以有多个 salve</li>
+</ul>
+<p><strong>主从复制的步骤</strong></p>
+<ol>
+<li>master 将改变记录到二进制日志 binary log (这些 记录过程叫做二进制日志事件 binary log events);</li>
+<li>salve 将 master 的 binary log events 拷贝到它的中继日志 (relay log);</li>
+<li>slave 重做中继日志中的事件，将改变应用到自己的数据库中;</li>
+</ol>
+<p><strong>Binlog日志的作用</strong></p>
+<ol>
+<li><strong>数据恢复：</strong> 因为 Binlog 详细记录了所有修改数据的 SQL，当某一时刻的数据误操作而导致出问题，或者数据库宕机数据丢失，那么可以根据 Binlog 来回放历史数据。</li>
+<li><strong>主从复制：</strong> 想要做多机备份的业务，可以去监听当前写库的 Binlog 日志，同步写库的所有更改。</li>
+</ol>
+<h2 id="MySQL-读写分离"><a href="#MySQL-读写分离" class="headerlink" title="MySQL 读写分离"></a>MySQL 读写分离</h2><p> 对数据库的更新操作往往要比查找操作更费时，对于高并发的业务场景，如果是单机部署的MySQL，会导致I/O频率过高。采用<strong>主从复制、读写分离可以提高数据库的可用性</strong>。</p>
+<p>MySQL读写分离是指 修改操作在主库上执行，而对于查询操作，可以在从库上执行。主要目的是分担主库的压力。主库压力太大，无法承载业务，通过实现读写分离还能进一步提升数据库的负载性能。对于高访问量的业务场景，MySQL读写分离显得格外重要。</p>
+<h2 id="一条SQL-语句的-执行顺序"><a href="#一条SQL-语句的-执行顺序" class="headerlink" title="一条SQL 语句的 执行顺序"></a>一条SQL 语句的 执行顺序</h2><p><strong>一条 SELECT语句的定义如下：</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;SELECT clause&gt; [&lt;FROM clause&gt;] [&lt;WHERE clause&gt;] [&lt;GROUP BY clause&gt;] [&lt;HAVING clause&gt;] [&lt;ORDER BY clause&gt;] [&lt;LIMIT clause&gt;]</span><br></pre></td></tr></table></figure>
+
+<p><strong>一条基本的SELECT语句的执行流程如下：</strong></p>
+<ol>
+<li>from:需要从哪个数据表检索数据 </li>
+<li>where:过滤表中数据的条件 </li>
+<li>group by:如何将上面过滤出的数据分组 </li>
+<li>having:对上面已经分组的数据进行过滤的条件 </li>
+<li>select:查看结果集中的哪个列，或列的计算结果 </li>
+<li>order by :按照什么样的顺序来查看返回的数据</li>
+<li>limit : 添加返回限制</li>
+</ol>
+<p><strong>参考资料</strong></p>
+<p><a href="https://www.cnblogs.com/rickiyang/p/13856388.html" target="_blank" rel="noopener">MySQL 主从复制</a></p>
+<p><a href="https://blog.csdn.net/u014044812/article/details/51004754" target="_blank" rel="noopener">sql的执行顺序</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/07/MySQL%E5%9F%BA%E7%A1%80%E7%BB%BC%E5%90%88/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-sql常用语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -846,86 +1000,6 @@
 
 
   
-    <article id="post-用户级线程与内核级线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/">用户级线程与内核级线程</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2021-06-24T12:04:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="用户级线程"><a href="#用户级线程" class="headerlink" title="用户级线程"></a>用户级线程</h1><h3 id="进程切换与线程切换的联系"><a href="#进程切换与线程切换的联系" class="headerlink" title="进程切换与线程切换的联系"></a>进程切换与线程切换的联系</h3><p>进程切换——&gt; 资源 (内存)+ 指令执行序列</p>
-<p>线程切换——&gt;保留了并发的优点同时又避免了进程切换的代价(实质上就是映射表不变而PC指针变)</p>
-<p>每个进程都包含一个映射表，如果进程切换了，那么程序选择的映射表也要跟着换。进程的切换主要包含两个部分即<strong>指令的切换</strong> + <strong>映射表的切换</strong>。其中指令的切换就是从这段程序跳到另外一段程序去执行，映射表的切换就是内存资源的切换。而<strong>线程的切换同属于一个进程里，不存在映射表的切换，只是指令的切换</strong>。所以在了解进程的切换之前，我们先来了解线程的切换，进程的切换就是在线程切换的基础上加上映射表的切换。</p>
-        
-          <a class="article-more-a" href="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/24/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1046,6 +1120,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
             
             <div class="clearfix"></div>
