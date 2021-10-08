@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>进程间通信 | 鑫宇的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、进程 线程及协程1、程序、进程、线程程序：通过某种语言编写的一组指令 ，即一段静态的代码。 进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了动态性。系统运行一个程序即是一个进程从创建，运行到消亡的过程。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到当前运行的进程。">
+  <meta name="description" content="一、进程 线程及协程1.程序、进程、线程程序：通过某种语言编写的一组指令 ，即一段静态的代码。 进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了动态性。系统运行一个程序即是一个进程从创建，运行到消亡的过程。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到当前运行的进程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程间通信">
 <meta property="og:url" content="http://yoursite.com/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/index.html">
 <meta property="og:site_name" content="鑫宇的个人博客">
-<meta property="og:description" content="一、进程 线程及协程1、程序、进程、线程程序：通过某种语言编写的一组指令 ，即一段静态的代码。 进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了动态性。系统运行一个程序即是一个进程从创建，运行到消亡的过程。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到当前运行的进程。">
+<meta property="og:description" content="一、进程 线程及协程1.程序、进程、线程程序：通过某种语言编写的一组指令 ，即一段静态的代码。 进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了动态性。系统运行一个程序即是一个进程从创建，运行到消亡的过程。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到当前运行的进程。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/1.png">
 <meta property="og:image" content="http://yoursite.com/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/5.png">
 <meta property="article:published_time" content="2021-09-26T13:22:29.000Z">
-<meta property="article:modified_time" content="2021-10-07T13:29:15.333Z">
+<meta property="article:modified_time" content="2021-10-08T01:49:40.447Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -168,7 +168,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、进程-线程及协程"><a href="#一、进程-线程及协程" class="headerlink" title="一、进程 线程及协程"></a>一、进程 线程及协程</h1><h4 id="1、程序、进程、线程"><a href="#1、程序、进程、线程" class="headerlink" title="1、程序、进程、线程"></a>1、程序、进程、线程</h4><p>程序：通过某种语言编写的一组指令 ，即一段<strong>静态的代码</strong>。</p>
+        <h1 id="一、进程-线程及协程"><a href="#一、进程-线程及协程" class="headerlink" title="一、进程 线程及协程"></a>一、进程 线程及协程</h1><h4 id="1-程序、进程、线程"><a href="#1-程序、进程、线程" class="headerlink" title="1.程序、进程、线程"></a>1.程序、进程、线程</h4><p>程序：通过某种语言编写的一组指令 ，即一段<strong>静态的代码</strong>。</p>
 <p>进程：程序的一次执行过程。将程序加载入内存分配空间并执行，该段静态代码程序便拥有了<strong>动态性</strong>。<strong>系统运行一个程序即是一个进程从创建，运行到消亡的过程</strong>。如下图所示，在 ubuntu中通过查看任务管理器的方式，我们就可以清楚看到当前运行的进程。</p>
 <a id="more"></a>  
 
@@ -180,7 +180,7 @@
 <p>如下图所示，在<code>CCleaner</code> 这一应用程序中，我们同时执行<code>Health Check</code> 以及 <code>Custom Clean</code> 两项子任务即为多线程。</p>
 <img src="/2021/09/26/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/5.png" alt="5" style="zoom:67%;">
 
-<h4 id="2、进程与线程的关系及区别"><a href="#2、进程与线程的关系及区别" class="headerlink" title="2、进程与线程的关系及区别"></a>2、进程与线程的关系及区别</h4><ul>
+<h4 id="2-进程与线程的关系及区别"><a href="#2-进程与线程的关系及区别" class="headerlink" title="2.进程与线程的关系及区别"></a>2.进程与线程的关系及区别</h4><ul>
 <li><strong>进程是资源分配的最小单位，线程是CPU调度的最小单位</strong></li>
 <li>进程有独立的地址空间，相互不影响，多个线程只是进程的不同执行路径，共享其地址空间及资源</li>
 <li>线程不能看做独立的应用，而进程可看作独立应用</li>
@@ -192,13 +192,24 @@
 <p>线程与资源分配无关，它属于某一进程，并和该进程内的其他线程共享进程的资源。线程只由相关的堆、栈 寄存器、程序计数器和线程控制表TCB组成，其中寄存器用来存储线程内的局部变量，但并不存储其他线程的相关变量。每一个独立的线程有一个程序的入口、顺序执行序列以及程序的出口，但是线程并不能独立的执行，必须依存于某个应用程序中，由应用程序提供对多个线程的执行控制。</p>
 <p>操作系统并没有将多个线程当作多个应用来实现进程的调度和管理以及资源的分配，而进程可作为独立的应用，拥有独立的内存空间。当一个进程崩溃后，在保护模式下并不会对其他进程产生影响，然而某个线程挂掉之后其所在的进程也会同样挂掉。</p>
 <p>进程切换比线程切换开销大、耗费资源、效率差，对于要求同时进行，并且要求共享某些变量的并发操作只能用线程，不能用进程。</p>
-<h4 id="3-协程"><a href="#3-协程" class="headerlink" title="3.协程"></a>3.协程</h4><p>用户级线程-&gt; 区别于进程和线程的调度是由操作系统决定，协程的调度由程序员控制</p>
+<h4 id="3-协程"><a href="#3-协程" class="headerlink" title="3.协程"></a>3.协程</h4><p>为了减小开销，协程的概念被提出来了。<strong>协程（Coroutines）是一种比线程更加轻量级的存在，正如一个进程可以拥有多个线程一样，一个线程可以拥有多个协程。</strong> 协程不是操作系统里的概念，而是完全由用户完全控制的。要是问他在哪的话，那也就是在代码逻辑里抽象出来的概念，是一段代码块。</p>
 <p><strong>协程的特点</strong></p>
 <ol>
 <li>线程的切换由操作系统负责调度，协程由用户自己进行调度，因此减少了上下文切换，提高了效率。</li>
 <li>线程的默认Stack大小是1M，而协程更轻量，接近1K。因此可以在相同的内存中开启更多的协程。</li>
 <li>由于在同一个线程上，因此可以避免竞争关系而使用锁。</li>
 <li>适用于被阻塞的，且需要大量并发的场景。但不适用于大量计算的多线程，遇到此种情况，更好实用线程去解决</li>
+</ol>
+<h4 id="4-子进程与父进程"><a href="#4-子进程与父进程" class="headerlink" title="4.子进程与父进程"></a>4.子进程与父进程</h4><p>在<a href="https://zh.wikipedia.org/wiki/UNIX" target="_blank" rel="noopener">UNIX</a>里，除了<a href="https://zh.wikipedia.org/wiki/Linux启动进程" target="_blank" rel="noopener">进程0</a>（即PID=0的交换进程，<em>Swapper Process</em>）以外的所有进程都是由其他进程使用<a href="https://zh.wikipedia.org/wiki/系统调用" target="_blank" rel="noopener">系统调用</a><a href="https://zh.wikipedia.org/wiki/Fork_(操作系统)" target="_blank" rel="noopener">fork</a>创建的，这里调用fork创建新进程的进程即为父进程，而相对应的为其创建出的进程则为子进程，因而除了进程0以外的进程都只有一个父进程，但一个进程可以有多个子进程。</p>
+<p>在Linux系统函数中，fork()是用来创建新的子进程的函数。根据Linux编程手册，在fork函数执行完毕后，如果创建新进程成功，则出现两个进程，一个是子进程，一个是父进程。<strong>在子进程中，fork函数返回0，在父进程中，fork返回新创建子进程的进程ID</strong>。我们可以通过fork返回的值来判断当前进程是子进程还是父进程。</p>
+<h4 id="5-僵尸进程与孤儿进程"><a href="#5-僵尸进程与孤儿进程" class="headerlink" title="5.僵尸进程与孤儿进程"></a>5.僵尸进程与孤儿进程</h4><ol>
+<li><strong>僵尸进程 ：</strong>当一个子进程结束运行（一般是调用<a href="https://zh.wikipedia.org/w/index.php?title=Exit_(操作系统)&action=edit&redlink=1" target="_blank" rel="noopener">exit</a>、运行时发生致命错误收到终止信号时，子进程的退出状态会回报给操作系统，系统则以<a href="https://zh.wikipedia.org/wiki/SIGCHLD" target="_blank" rel="noopener">SIGCHLD</a>信号将子进程被结束的事件告知父进程，此时子进程的<a href="https://zh.wikipedia.org/wiki/进程控制块" target="_blank" rel="noopener">进程控制块</a>（PCB）仍驻留在内存中。一般来说，收到SIGCHLD后，父进程会使用<a href="https://zh.wikipedia.org/wiki/Wait_(系统调用)" target="_blank" rel="noopener">wait</a>系统调用以取得子进程的退出状态，然后内核就可以从内存中释放已结束的子进程的PCB；而如若父进程没有这么做的话，子进程的PCB就会一直驻留在内存中，也即成为<a href="https://zh.wikipedia.org/wiki/僵尸进程" target="_blank" rel="noopener">僵尸进程</a>。</li>
+<li><strong>孤儿进程 ：</strong>孤儿进程则是指父进程结束后仍在运行的子进程。在类UNIX系统中，孤儿进程一般会被<code>init</code> 进程所“收养”，成为<code>init</code>的子进程。</li>
+</ol>
+<p><strong>避免产生僵尸进程的方法：</strong></p>
+<ol>
+<li>将父进程中对SIGCHLD信号的处理函数设为SIG_IGN（忽略信号）；</li>
+<li>fork两次并杀死一级子进程，令二级子进程成为孤儿进程而被<code>init</code>所“收养”、清理；</li>
 </ol>
 <h1 id="二、进程间通信"><a href="#二、进程间通信" class="headerlink" title="二、进程间通信"></a>二、进程间通信</h1><p><strong>进程间通信</strong>（<strong>IPC</strong>，<em>Inter-Process Communication</em>），指至少两个进程或线程间传送数据或信号的一些技术或方法。</p>
 <h4 id="进程间通信的方式"><a href="#进程间通信的方式" class="headerlink" title="进程间通信的方式"></a>进程间通信的方式</h4><ol>
@@ -331,7 +342,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、进程-线程及协程"><span class="toc-number">1.</span> <span class="toc-text">一、进程 线程及协程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、程序、进程、线程"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1、程序、进程、线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、进程与线程的关系及区别"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">2、进程与线程的关系及区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-协程"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">3.协程</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、进程间通信"><span class="toc-number">2.</span> <span class="toc-text">二、进程间通信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#进程间通信的方式"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">进程间通信的方式</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、进程-线程及协程"><span class="toc-number">1.</span> <span class="toc-text">一、进程 线程及协程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-程序、进程、线程"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1.程序、进程、线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-进程与线程的关系及区别"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">2.进程与线程的关系及区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-协程"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">3.协程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-子进程与父进程"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">4.子进程与父进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-僵尸进程与孤儿进程"><span class="toc-number">1.0.0.5.</span> <span class="toc-text">5.僵尸进程与孤儿进程</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、进程间通信"><span class="toc-number">2.</span> <span class="toc-text">二、进程间通信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#进程间通信的方式"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">进程间通信的方式</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>

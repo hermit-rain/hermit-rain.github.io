@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/07/02/CPU%E7%9A%84%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5/2.png">
 <meta property="og:image" content="http://yoursite.com/2021/07/02/CPU%E7%9A%84%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5/3.png">
 <meta property="article:published_time" content="2021-07-02T02:13:22.000Z">
-<meta property="article:modified_time" content="2021-07-12T07:15:43.738Z">
+<meta property="article:modified_time" content="2021-10-08T05:52:18.424Z">
 <meta property="article:author" content="rain">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -203,7 +203,12 @@
 <p>所以折中和综合让操作系统的调度变得异常的复杂……</p>
 <h2 id="常用的CPU调度算法"><a href="#常用的CPU调度算法" class="headerlink" title="常用的CPU调度算法"></a>常用的CPU调度算法</h2><h4 id="FCFS-gt-First-Come-First-Served"><a href="#FCFS-gt-First-Come-First-Served" class="headerlink" title="FCFS-&gt; First Come, First Served"></a><strong>FCFS-&gt; First Come, First Served</strong></h4><p>先来先服务</p>
 <h4 id="SJF：短作业优先"><a href="#SJF：短作业优先" class="headerlink" title="SJF：短作业优先"></a><strong>SJF：短作业优先</strong></h4><p>如何将完成所需时间小的任务提前，那么它的周转时间就会缩短，平均周转时间也就减少。系统的平均满意度提高。但是这样所需时间长的任务总是被排在后面，导致响应时间又很长？？</p>
-<h4 id="RR-按照时间片来轮转调度"><a href="#RR-按照时间片来轮转调度" class="headerlink" title="RR: 按照时间片来轮转调度"></a><strong>RR: 按照时间片来轮转调度</strong></h4><p>按照时间片可以很好的满足响应时间，但是时间片的设置需要好好考虑</p>
+<h4 id="HRRN-最高响应比优先法"><a href="#HRRN-最高响应比优先法" class="headerlink" title="HRRN : 最高响应比优先法"></a>HRRN : 最高响应比优先法</h4><p>最高响应比优先法(HRRN，Highest Response Ratio Next)是对FCFS方式和SJF方式的一种综合平衡。FCFS方式只考虑每个作业的等待时间而未考虑执行时间的长短，而SJF方式只考虑执行时间而未考虑等待时间的长短。因此，这两种调度算法在某些极端情况下会带来某些不便。HRN调度策略同时考虑每个作业的等待时间长短和估计需要的执行时间长短，从中选出响应比最高的作业投入执行。这样，即使是长作业，随着它等待时间的增加，W / T也就随着增加，也就有机会获得调度执行。这种算法是介于FCFS和SJF之间的一种折中算法。<br><strong>算法原理：响应比R定义如下： R =(W+T)/T = 1+W/T</strong><br>其中T为该作业估计需要的执行时间，W为作业在后备状态队列中的等待时间。每当要进行作业调度时，系统计算每个作业的响应比，选择其中R最大者投入执行。</p>
+<ul>
+<li>算法优点：由于长作业也有机会投入运行，在同一时间内处理的作业数显然要少于SJF法，从而采用HRRN方式时其吞吐量将小于采用SJF 法时的吞吐量。</li>
+<li>算法缺点：由于每次调度前要计算响应比，系统开销也要相应增加。</li>
+</ul>
+<h4 id="RR-按照时间片来轮转调度"><a href="#RR-按照时间片来轮转调度" class="headerlink" title="RR: 按照时间片来轮转调度"></a>RR: 按照时间片来轮转调度</h4><p>按照时间片可以很好的满足响应时间，但是时间片的设置需要好好考虑</p>
 <p>时间片太大 -&gt; 响应时间太长； 时间片小 -&gt; 切换频繁内耗大，吞吐量小；</p>
 <p>折衷：进程的个数要有所限制 ；时间片10 ~ 100ms，切换时间0.1~1ms（1%）</p>
 <h4 id="一些问题的思考"><a href="#一些问题的思考" class="headerlink" title="一些问题的思考"></a>一些问题的思考</h4><p>SJF解决了周转时间，RR解决了响应时间，<strong>但是如果响应时间和周转时间同时存在呢？</strong>就比如word很关心响应时间，而gcc很关心周转时间，这两类任务同时存在怎么办呢？</p>
@@ -246,7 +251,12 @@
 <li>每个进程只用维护一个变量counter，简单、高效，简直完美！</li>
 </ul>
 <p><strong>参考资料</strong></p>
-<p><a href="https://www.bilibili.com/video/BV1d4411v7u7?p=15" target="_blank" rel="noopener">哈工大李治军操作系统</a></p>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1d4411v7u7?p=15" target="_blank" rel="noopener">哈工大李治军操作系统</a></li>
+<li><a href="https://blog.csdn.net/leex_brave/article/details/51638300" target="_blank" rel="noopener">CPU调度策略</a></li>
+<li><a href="https://www.cnblogs.com/AmosAlbert/p/13747430.html" target="_blank" rel="noopener">各种调度算法均衡利弊</a></li>
+<li><a href="https://haicoder.net/note/opsys-interview/opsys-interview-process-call-algor.html" target="_blank" rel="noopener">进程调度算法</a></li>
+</ul>
 
       
 
@@ -368,7 +378,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是CPU调度？"><span class="toc-number">1.</span> <span class="toc-text">什么是CPU调度？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU调度的直观想法"><span class="toc-number">2.</span> <span class="toc-text">CPU调度的直观想法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面对诸多场景如果设计调度算法呢？"><span class="toc-number">3.</span> <span class="toc-text">面对诸多场景如果设计调度算法呢？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何让进程满意？-gt-时间复杂度"><span class="toc-number">3.1.</span> <span class="toc-text">如何让进程满意？-&gt; 时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何做到合理呢？"><span class="toc-number">3.2.</span> <span class="toc-text">如何做到合理呢？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的CPU调度算法"><span class="toc-number">4.</span> <span class="toc-text">常用的CPU调度算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FCFS-gt-First-Come-First-Served"><span class="toc-number">4.0.1.</span> <span class="toc-text">FCFS-&gt; First Come, First Served</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SJF：短作业优先"><span class="toc-number">4.0.2.</span> <span class="toc-text">SJF：短作业优先</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RR-按照时间片来轮转调度"><span class="toc-number">4.0.3.</span> <span class="toc-text">RR: 按照时间片来轮转调度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一些问题的思考"><span class="toc-number">4.0.4.</span> <span class="toc-text">一些问题的思考</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-0-11-的调度函数schedule"><span class="toc-number">5.</span> <span class="toc-text">Linux 0.11 的调度函数schedule()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#counter的两个作用"><span class="toc-number">5.1.</span> <span class="toc-text">counter的两个作用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优先级"><span class="toc-number">5.1.1.</span> <span class="toc-text">优先级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间片"><span class="toc-number">5.1.2.</span> <span class="toc-text">时间片</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是CPU调度？"><span class="toc-number">1.</span> <span class="toc-text">什么是CPU调度？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU调度的直观想法"><span class="toc-number">2.</span> <span class="toc-text">CPU调度的直观想法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面对诸多场景如果设计调度算法呢？"><span class="toc-number">3.</span> <span class="toc-text">面对诸多场景如果设计调度算法呢？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何让进程满意？-gt-时间复杂度"><span class="toc-number">3.1.</span> <span class="toc-text">如何让进程满意？-&gt; 时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何做到合理呢？"><span class="toc-number">3.2.</span> <span class="toc-text">如何做到合理呢？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的CPU调度算法"><span class="toc-number">4.</span> <span class="toc-text">常用的CPU调度算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FCFS-gt-First-Come-First-Served"><span class="toc-number">4.0.1.</span> <span class="toc-text">FCFS-&gt; First Come, First Served</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SJF：短作业优先"><span class="toc-number">4.0.2.</span> <span class="toc-text">SJF：短作业优先</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HRRN-最高响应比优先法"><span class="toc-number">4.0.3.</span> <span class="toc-text">HRRN : 最高响应比优先法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RR-按照时间片来轮转调度"><span class="toc-number">4.0.4.</span> <span class="toc-text">RR: 按照时间片来轮转调度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一些问题的思考"><span class="toc-number">4.0.5.</span> <span class="toc-text">一些问题的思考</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-0-11-的调度函数schedule"><span class="toc-number">5.</span> <span class="toc-text">Linux 0.11 的调度函数schedule()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#counter的两个作用"><span class="toc-number">5.1.</span> <span class="toc-text">counter的两个作用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优先级"><span class="toc-number">5.1.1.</span> <span class="toc-text">优先级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间片"><span class="toc-number">5.1.2.</span> <span class="toc-text">时间片</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
